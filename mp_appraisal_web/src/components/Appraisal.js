@@ -7,7 +7,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { logout } from './Authentication'
-import Header from './header'
+
 
 const Appraisal = () => {
     const [productKnowledge, setProductKnowledge] = useState('')
@@ -25,7 +25,6 @@ const Appraisal = () => {
 
     return (
         <div className="appraisal-page">
-            <Header />
             <div className = "appraisal-form">
             <h1>Appraisal</h1>
             <form onSubmit={handleSubmit}>

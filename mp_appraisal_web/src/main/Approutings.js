@@ -6,6 +6,7 @@ import Appraisal from '../components/Appraisal'
 import Dashboard from '../components/Dashboard'
 // import Logout from './components/Logout'
 import { isAuthenticated } from '../components/Authentication'
+import Header from '../components/header'
 
 const Approutings = () => {
     const PrivateRoute = (props) => {
@@ -18,6 +19,7 @@ const Approutings = () => {
     return (
         <div>
             <Router>
+                <Header />
                 <Switch>
                     <Redirect exact from='/' to='/login' />
                     <Route exact path="/login" component={Login} />

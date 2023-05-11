@@ -11,9 +11,7 @@ const Header = () => {
   const history = useHistory();
 
   const handleLogout = () => {
-    logout(() => {
-      console.log("Logout successful");
-    });
+    logout();
     history.push("/login");
   };
 
@@ -27,7 +25,7 @@ const Header = () => {
           onClick={() => history.push("/dashboard")}
         />
       </div>
-      <nav className="header-component" style={{width:"60%"}}>
+      <nav className="header-component" style={{ width: "60%" }}>
         <ul className="nav-list">
           <li>
             <Link to="/dashboard" className="nav-link">
