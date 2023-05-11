@@ -75,3 +75,81 @@
   background-color: #737d85;
 }
 
+/* Add Styling for Appraisal Page */
+.appraisal-form {
+  width: 300px;
+  margin: 0 auto;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.appraisal-form h1 {
+  text-align: center;
+  color: #4d4d4d;
+  font-size: 24px;
+  padding: 20px 0 20px 0;
+}
+
+.appraisal-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  margin-bottom: 15px;
+  box-sizing:border-box;
+}
+
+.appraisal-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #535b63;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.appraisal-form input[type="submit"]:hover {
+  background-color: #737d85;
+}
+
+/* Add some card effects for appraisal-form class */
+.appraisal-form {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px #000000;
+  -webkit-box-shadow: 0px 0px 10px 0px #000000;
+  -moz-box-shadow: 0px 0px 10px 0px #000000;
+}
+
+/* the labels should float above the input fields */
+.appraisal-form label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+}
+
+/* the input fields only border bottom should be visible even after focus */
+.appraisal-form input[type="text"] {
+  border: none;
+  border-bottom: 1px solid #4d4d4d;
+  background-color: #ffffff;
+  outline: none;
+}
+/* Apply styling on Apparaisal Submit Button with backgound effects and hoverig effects*/
+.appraisal-form .submit {
+  background-color: #4d4d4d;
+  color: #ffffff;
+  border: 2px solid #4d4d4d;
+  border-radius: 2px;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.appraisal-form .submit:hover {
+  background-color: #ffffff;
+  color: #4d4d4d;
+}
+

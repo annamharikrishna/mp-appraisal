@@ -8,23 +8,24 @@ import Dashboard from '../components/Dashboard'
 import { isAuthenticated } from '../components/Authentication'
 
 const Approutings = () => {
-    const PrivateRoute = ({ component: Component, ...rest }) => (
-        <Route {...rest} render={(props) => (
-            isAuthenticated() === true
-                ? <Component {...props} />
-                : <Redirect to='/login' />
-        )} />
-    )
+    const PrivateRoute = (props) => {
+        console.log(isAuthenticated())
+        if(!isAuthenticated()){
+            return <Redirect to='/login' />
+        }
+        return <Route {...props} />;
+    }
     return (
         <div>
-        <Router>
-            <Switch>
-                <Route exact path="/" component={Login} />
-                <PrivateRoute path="/appraisal" component={Appraisal} />
-                <PrivateRoute path="/dashboard" component={Dashboard} />
-                {/* <PrivateRoute path="/logout" component={Logout} /> */}
-            </Switch>
-        </Router>
+            <Router>
+                <Switch>
+                    <Redirect exact from='/' to='/appraisal' />
+                    <Route exact path="/login" component={Login} />
+                    <PrivateRoute path="/appraisal" component={Appraisal} />
+                    <PrivateRoute path="/dashboard" component={Dashboard} />
+                    {/* <PrivateRoute path="/logout" component={Logout} /> */}
+                </Switch>
+            </Router>
         </div>
     )
 }
