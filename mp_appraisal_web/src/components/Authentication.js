@@ -2,6 +2,7 @@
 // // create authentication for login page
 export const authenticate = (callback) => {
     localStorage.setItem('isAuthenticated', true)
+    console.log('authenticated')
     callback()
 }
 // what is callback in above code? and

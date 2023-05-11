@@ -9,20 +9,20 @@
 
 import * as React from 'react'
 import { useState } from 'react'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { authenticate, isAuthenticated } from './Authentication'
-import {withRouter} from 'react-router-dom'
-const Login = (props) => {
+const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    // const history = useHistory()
+    const history = useHistory()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if (username === 'admin' && password === 'admin') {
             authenticate(() => {
-                props.history.push('/appraisal')
+                console.log('Login successful')
             })
+            history.push('/appraisal')
         }
     }
 
@@ -44,4 +44,4 @@ const Login = (props) => {
     )
 }
 
-export default withRouter(Login)
+export default Login
