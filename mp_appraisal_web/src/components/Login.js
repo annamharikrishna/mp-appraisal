@@ -9,9 +9,9 @@
 
 import * as React from 'react'
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { authenticate, isAuthenticated } from './Authentication'
-import withRouter from 'react'
+import {withRouter} from 'react-router-dom'
 const Login = (props) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
