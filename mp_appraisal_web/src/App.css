@@ -211,60 +211,6 @@
   color: #4d4d4d;
 }
 
-/* Add Styling for Dashboard component */
-.dashboard {
-  width: 100%;
-  margin: 0 auto;
-  font-size: 15px;
-  padding: 10px;
-}
-
-.dashboard h1 {
-  text-align: center;
-  color: #4d4d4d;
-  font-size: 24px;
-  padding: 20px 0 20px 0;
-}
-
-.dashboard input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #dddddd;
-  margin-bottom: 15px;
-  box-sizing:border-box;
-}
-
-.dashboard input[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  background-color: #535b63;
-  border: 0;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-weight: bold;
-  color: #ffffff;
-} 
-
-.dashboard input[type="submit"]:hover {
-  background-color: #737d85;
-} 
-/* dashboard-cards display should be flex and direction must be row*/
-.dashboard-cards {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-/* Add some card effects for each dashboard-cards class */
-.dashboard-card {
-  background-color: #ffffff;
-  padding: 20px;
-  margin-left: 20px;
-  box-shadow: 0px 0px 10px 0px #000000;
-  -webkit-box-shadow: 0px 0px 10px 0px #000000;
-  -moz-box-shadow: 0px 0px 10px 0px #000000;
-}
 
 /* Add Styling for Header */
 .header {
@@ -323,10 +269,126 @@
 }
 
 
+/* Add Styling to Dashboard Page */
+.dashboard-page{
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+}
 
+.dashboard-form {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 15px;
+  padding: 10px;
+  margin-top:20px;
+}
 
+.dashboard-form h1 {
+  text-align: center;
+  color: #4d4d4d;
+  font-size: 24px;
+  padding: 20px 0 20px 0;
+}
 
+.dashboard-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  margin-bottom: 15px;
+  box-sizing:border-box;
+}
 
+.dashboard-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #535b63;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.dashboard-form input[type="submit"]:hover {
+  background-color: #737d85;
+}
+
+/* dashboard-cards display must be flex */
+.dashboard-cards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+/*Add some card effects for each card in dashboard-cards class and */
+.dashboard-cards .card {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px #000000;
+  -webkit-box-shadow: 0px 0px 10px 0px #000000;
+  -moz-box-shadow: 0px 0px 10px 0px #000000;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+/* add styling for edit and view buttons in dashboard-cards */
+.dashboard-cards .card .edit-btn, .dashboard-cards .card .view-btn {
+  background-color: #4d4d4d;
+  color: #ffffff;
+  border: 2px solid #4d4d4d;
+  border-radius: 2px;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: auto;
+  margin-left: 10px;
+}
+
+/*add styling for popup class and popup-inner in dashboard page*/
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 90%;
+  max-width: 700px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* add styling for close-btn in popup-inner class */
+.popup-inner .close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/* add styling for close-btn:hover in popup-inner class */
+.popup-inner .close-btn:hover {
+  opacity: 1;
+}
 
 
 
