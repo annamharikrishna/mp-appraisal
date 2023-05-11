@@ -25,7 +25,7 @@ const Appraisal = () => {
     }
 
     return (
-        <div>
+        <div className='appraisal-form'>
             <h1>Appraisal</h1>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -52,7 +52,7 @@ const Appraisal = () => {
                     <label>Overall Rating: </label>
                     <input type="text" name="overallRating" value={overallRating} onChange={(e) => setOverallRating(e.target.value)} />
                 </div>
-                <button type="submit">Logout</button>
+                <button type="submit" className='submit'>Submit</button>
             </form>
         </div>
     )
