@@ -19,7 +19,7 @@ const Approutings = () => {
         <div>
             <Router>
                 <Switch>
-                    <Redirect exact from='/' to='/appraisal' />
+                    <Redirect exact from='/' to='/login' />
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute path="/appraisal" component={Appraisal} />
                     <PrivateRoute path="/dashboard" component={Dashboard} />
