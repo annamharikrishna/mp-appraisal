@@ -36,3 +36,42 @@
     transform: rotate(360deg);
   }
 }
+
+/* Add Styling for Login Page*/
+.login-form {
+  width: 300px;
+  margin: 0 auto;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.login-form h1 {
+  text-align: center;
+  color: #4d4d4d;
+  font-size: 24px;
+  padding: 20px 0 20px 0;
+}
+
+.login-form input[type="password"], .login-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  margin-bottom: 15px;
+  box-sizing:border-box;
+}
+
+.login-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #535b63;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.login-form input[type="submit"]:hover {
+  background-color: #737d85;
+}
+
