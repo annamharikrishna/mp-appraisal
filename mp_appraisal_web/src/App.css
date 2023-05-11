@@ -211,6 +211,61 @@
   color: #4d4d4d;
 }
 
+/* Add Styling for Dashboard component */
+.dashboard {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.dashboard h1 {
+  text-align: center;
+  color: #4d4d4d;
+  font-size: 24px;
+  padding: 20px 0 20px 0;
+}
+
+.dashboard input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  margin-bottom: 15px;
+  box-sizing:border-box;
+}
+
+.dashboard input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #535b63;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+} 
+
+.dashboard input[type="submit"]:hover {
+  background-color: #737d85;
+} 
+/* dashboard-cards display should be flex and direction must be row*/
+.dashboard-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+/* Add some card effects for each dashboard-cards class */
+.dashboard-card {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-left: 20px;
+  box-shadow: 0px 0px 10px 0px #000000;
+  -webkit-box-shadow: 0px 0px 10px 0px #000000;
+  -moz-box-shadow: 0px 0px 10px 0px #000000;
+}
+
 /* Add Styling for Header */
 .header {
   background-color: #333;
