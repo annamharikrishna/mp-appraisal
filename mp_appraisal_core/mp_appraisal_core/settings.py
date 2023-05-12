@@ -25,7 +25,7 @@ SECRET_KEY = 'j1@zoqaunqz)l1p5#ku4nbw5q+z2il(_nb_-f2ei=e7n_%md+%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'appraisalentry.apps.AppraisalentryConfig'
+    'appraisalentry.apps.AppraisalentryConfig',
+    'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'mp_appraisal_core.urls'
