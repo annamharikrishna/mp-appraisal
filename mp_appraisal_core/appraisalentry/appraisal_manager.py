@@ -20,8 +20,8 @@ class EmployeeAppraisalManager:
     # role should be 'manager'
 
     def employee_appraisal(self, data):
-        employee = Employee.objects.get(id=data.get('employee_id'))
-        user = Employee.objects.get(id=data.get('user_id'))
+        employee = Employee.objects.get(employee_id=data.get('employee_id'))
+        user = Employee.objects.get(employee_id=data.get('user_id'))
         if user.role == 'employee':
             employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                 employee=employee,
@@ -36,7 +36,7 @@ class EmployeeAppraisalManager:
                 manager_rating=data.get('manager_rating')
             )
         elif user.role == 'supervisor':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id'))
+            employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
             if employee_appraisal_form.status == 'Submitted':
                 employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                     employee=employee,
@@ -58,7 +58,7 @@ class EmployeeAppraisalManager:
                 )
             """
         elif user.role == 'manager':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id'))
+            employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
             if employee_appraisal_form.status == 'Supervisor Reviewed':
                 employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                     employee=employee,
@@ -73,7 +73,9 @@ class EmployeeAppraisalManager:
                     overall_rating=data.get('overall_rating'),
                     reviewed_by=user
                 )
-                """ Copilot suggestion
+            else:
+                raise Exception("Supervisor has not reviewed the appraisal form")
+            """ Copilot suggestion
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id')).update(
                 status='Manager Reviewed',
                 manager_rating=data.get('manager_rating'),
@@ -86,13 +88,16 @@ class EmployeeAppraisalManager:
     # 2. Get employee appraisals based on Date range
 
     def get_employee_appraisal(self, data):
-        employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id'))
+        employee_appraisal_form = EmployeeAppraisalForm.objects.all()
+        if data.get('employee_id'):
+            employee = Employee.objects.get(employee_id=data.get('employee_id'))
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
         if data.get('status'):
             employee_appraisal_form = employee_appraisal_form.filter(status=data.get('status'))
         if data.get('from_date') and data.get('to_date'):
             employee_appraisal_form = employee_appraisal_form.filter(
                 created_at__range=[data.get('from_date'), data.get('to_date')])
-        return employee_appraisal_form
+        return employee_appraisal_form.values()
 
     # create a registration function for employee using EmployeeSerializer
 
@@ -109,7 +114,7 @@ class EmployeeAppraisalManager:
 
     @staticmethod
     def get_employee(data):
-        employee = Employee.objects.filter(id=data.get('employee_id')).values()
+        employee = Employee.objects.filter(employee_id=data.get('employee_id')).values()
         return employee
 
     # create a function to login employee
