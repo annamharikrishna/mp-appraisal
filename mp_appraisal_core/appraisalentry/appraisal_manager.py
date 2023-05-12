@@ -20,8 +20,8 @@ class EmployeeAppraisalManager:
     # role should be 'manager'
 
     def employee_appraisal(self, data):
-        employee = Employee.objects.get(id=data.get('employee_id'))
-        user = Employee.objects.get(id=data.get('user_id'))
+        employee = Employee.objects.get(employee_id=data.get('employee_id'))
+        user = Employee.objects.get(employee_id=data.get('user_id'))
         if user.role == 'employee':
             employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                 employee=employee,
@@ -36,7 +36,7 @@ class EmployeeAppraisalManager:
                 manager_rating=data.get('manager_rating')
             )
         elif user.role == 'supervisor':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id'))
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
             if employee_appraisal_form.status == 'Submitted':
                 employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                     employee=employee,
