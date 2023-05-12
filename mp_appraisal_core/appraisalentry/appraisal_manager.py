@@ -95,7 +95,7 @@ class EmployeeAppraisalManager:
         if data.get('user_id'):
             user_role = Employee.objects.get(employee_id=data.get('user_id')).role
         else:
-            raise Exception("User id is required")
+            raise Exception("user_id is required")
         if data.get('employee_id'):
             employee = Employee.objects.get(employee_id=data.get('employee_id'))
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
@@ -111,6 +111,8 @@ class EmployeeAppraisalManager:
                 employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee__role__in=['employee', 'supervisor'])
             elif user_role == 'supervisor':
                 employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee__role='employee')
+            else:
+                raise Exception("unauthorized user role")
         return employee_appraisal_form.values()
 
     # create a registration function for employee using EmployeeSerializer
