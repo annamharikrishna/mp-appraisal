@@ -52,6 +52,9 @@ const Dashboard = () => {
         }
     }, [popUpData])
 
+    
+
+
     const history = useHistory()
     //  Now show eact object in a data as a card and give edit button which will redirect to the appraisal page and show the data of that object in the appraisal page. that card contains only userName and OverallRating
     const handleEdit = (e) => {

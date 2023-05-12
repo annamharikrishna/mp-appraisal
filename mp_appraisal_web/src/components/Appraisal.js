@@ -3,7 +3,7 @@
 // Solution:
 // create Appraisal.js file in src/components folder and add the following code:
 // // create a basic Appraisal page which contains the form fields Product Knowledge, System Knowledge, Sales Promotion Skills, Private Label Promotion Skills, Customer Interaction Skills, Overall Rating - Rating on a scale of 1-5
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { logout } from './Authentication'
@@ -17,11 +17,15 @@ const Appraisal = () => {
     const [customerInteractionSkills, setCustomerInteractionSkills] = useState('')
     const [overallRating, setOverallRating] = useState('')
     const history = useHistory()
-
+    const [isOverallRating, setIsOverallRating] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault()
         history.push('/dashboard')
     }
+    useEffect(()=>{
+        let role= localStorage.getItem('userRole')
+        setIsOverallRating(role && role==='employee')
+    }, [])
 
     return (
         <div className="appraisal-page">
@@ -50,7 +54,7 @@ const Appraisal = () => {
                 </div>
                 <div>
                     <label>Overall Rating: </label>
-                    <input type="text" name="overallRating" value={overallRating} onChange={(e) => setOverallRating(e.target.value)} />
+                    <input type="text" name="overallRating" disabled={isOverallRating} value={overallRating} onChange={(e) => setOverallRating(e.target.value)} />
                 </div>
                 <button type="submit" className='submit'>Submit</button>
             </form>
