@@ -9,7 +9,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authenticate, isAuthenticated } from "./Authentication";
+// import { authenticate, isAuthenticated } from "./Authentication";
 import { APPRAISAL_BASE_URL } from "../config/config.environment";
 const Login = () => {
   const [employee_id, setUsername] = useState("");
@@ -32,6 +32,8 @@ const Login = () => {
     };
     const response = await fetch(url, options);
     const data = await response.json();
+    // console.log(data,[data[0].employee_id]);
+    localStorage.setItem("userRole", data[0].role);
     if (response.status === 200) {
       history.push("/appraisal");
     }
