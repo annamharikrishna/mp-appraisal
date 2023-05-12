@@ -19,7 +19,9 @@ class EmployeeAppraisalManager:
     # 3. Manager can update the 'Supervisor Reviewed' appraisal form with status as 'Manager Reviewed' and
     # role should be 'manager'
 
-    def employee_appraisal(self, data):
+    @staticmethod
+    def employee_appraisal(data):
+        employee_appraisal_form = None
         employee = Employee.objects.get(employee_id=data.get('employee_id'))
         user = Employee.objects.get(employee_id=data.get('user_id'))
         if user.role == 'employee':
@@ -87,7 +89,8 @@ class EmployeeAppraisalManager:
     # 1. Get employee appraisals based on status
     # 2. Get employee appraisals based on Date range
 
-    def get_employee_appraisal(self, data):
+    @staticmethod
+    def get_employee_appraisal(data):
         employee_appraisal_form = EmployeeAppraisalForm.objects.all()
         if data.get('employee_id'):
             employee = Employee.objects.get(employee_id=data.get('employee_id'))
@@ -127,9 +130,11 @@ class EmployeeAppraisalManager:
             return employee
         else:
             return False
-  # Generate a function that converts a list of dictionaries to an excel file with .xlsx extension
 
-    def convert_to_excel(self, data):
+    # Generate a function that converts a list of dictionaries to an excel file with .xlsx extension
+
+    @staticmethod
+    def convert_to_excel(data):
 
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
@@ -149,6 +154,7 @@ class EmployeeAppraisalManager:
 
     def get_excel_response(self, data):
         output = self.convert_to_excel(data)
-        response = HttpResponse(output.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response = HttpResponse(output.read(), content_type=
+                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename=employee_appraisal.xlsx'
         return response
