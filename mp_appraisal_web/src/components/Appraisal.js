@@ -3,7 +3,7 @@
 // Solution:
 // create Appraisal.js file in src/components folder and add the following code:
 // // create a basic Appraisal page which contains the form fields Product Knowledge, System Knowledge, Sales Promotion Skills, Private Label Promotion Skills, Customer Interaction Skills, Overall Rating - Rating on a scale of 1-5
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useAxios from '../hooks/useAxios'

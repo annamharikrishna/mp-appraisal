@@ -3,7 +3,7 @@
 export const authenticate = () => {
     localStorage.setItem('isAuthenticated', true)
     console.log('authenticated')
-    // callback()
+    callback()
 }
 // what is callback in above code? and
 export const isAuthenticated = () => {
