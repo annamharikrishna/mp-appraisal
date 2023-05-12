@@ -20,7 +20,7 @@ const Appraisal = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        history.push('/')
+        history.push('/dashboard')
     }
 
     return (
