@@ -19,11 +19,9 @@ class EmployeeAppraisalManager:
     # 3. Manager can update the 'Supervisor Reviewed' appraisal form with status as 'Manager Reviewed' and
     # role should be 'manager'
 
-    @staticmethod
-    def employee_appraisal(data):
-        employee_appraisal_form = None
-        employee = Employee.objects.get(employee_id=data.get('employee_id'))
-        user = Employee.objects.get(employee_id=data.get('user_id'))
+    def employee_appraisal(self, data):
+        employee = Employee.objects.get(id=data.get('employee_id'))
+        user = Employee.objects.get(id=data.get('user_id'))
         if user.role == 'employee':
             employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                 employee=employee,
@@ -38,7 +36,7 @@ class EmployeeAppraisalManager:
                 manager_rating=data.get('manager_rating')
             )
         elif user.role == 'supervisor':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id'))
             if employee_appraisal_form.status == 'Submitted':
                 employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                     employee=employee,
@@ -60,7 +58,7 @@ class EmployeeAppraisalManager:
                 )
             """
         elif user.role == 'manager':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id'))
             if employee_appraisal_form.status == 'Supervisor Reviewed':
                 employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                     employee=employee,
@@ -75,9 +73,7 @@ class EmployeeAppraisalManager:
                     overall_rating=data.get('overall_rating'),
                     reviewed_by=user
                 )
-            else:
-                raise Exception("Supervisor has not reviewed the appraisal form")
-            """ Copilot suggestion
+                """ Copilot suggestion
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id')).update(
                 status='Manager Reviewed',
                 manager_rating=data.get('manager_rating'),
@@ -89,18 +85,14 @@ class EmployeeAppraisalManager:
     # 1. Get employee appraisals based on status
     # 2. Get employee appraisals based on Date range
 
-    @staticmethod
-    def get_employee_appraisal(data):
-        employee_appraisal_form = EmployeeAppraisalForm.objects.all()
-        if data.get('employee_id'):
-            employee = Employee.objects.get(employee_id=data.get('employee_id'))
-            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
+    def get_employee_appraisal(self, data):
+        employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id'))
         if data.get('status'):
             employee_appraisal_form = employee_appraisal_form.filter(status=data.get('status'))
         if data.get('from_date') and data.get('to_date'):
             employee_appraisal_form = employee_appraisal_form.filter(
                 created_at__range=[data.get('from_date'), data.get('to_date')])
-        return employee_appraisal_form.values()
+        return employee_appraisal_form
 
     # create a registration function for employee using EmployeeSerializer
 
@@ -117,7 +109,7 @@ class EmployeeAppraisalManager:
 
     @staticmethod
     def get_employee(data):
-        employee = Employee.objects.filter(employee_id=data.get('employee_id')).values()
+        employee = Employee.objects.filter(id=data.get('employee_id')).values()
         return employee
 
     # create a function to login employee
@@ -130,11 +122,9 @@ class EmployeeAppraisalManager:
             return employee
         else:
             return False
+  # Generate a function that converts a list of dictionaries to an excel file with .xlsx extension
 
-    # Generate a function that converts a list of dictionaries to an excel file with .xlsx extension
-
-    @staticmethod
-    def convert_to_excel(data):
+    def convert_to_excel(self, data):
 
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
@@ -154,7 +144,6 @@ class EmployeeAppraisalManager:
 
     def get_excel_response(self, data):
         output = self.convert_to_excel(data)
-        response = HttpResponse(output.read(), content_type=
-                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response = HttpResponse(output.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename=employee_appraisal.xlsx'
         return response
