@@ -3,5 +3,4 @@
 *.iml
 *.pyc
 __pycache__/
-migrations
 package-lock.json
