@@ -14,7 +14,6 @@ const Header = () => {
   const handleLogout = () => {
     logout();
     history.push("/login");
-    localStorage.clear();
   };
 
   return (
