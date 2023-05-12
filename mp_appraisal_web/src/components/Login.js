@@ -12,33 +12,28 @@ import { useHistory } from "react-router-dom";
 import { authenticate, isAuthenticated } from "./Authentication";
 import { APPRAISAL_BASE_URL } from "../config/config.environment";
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [employee_id, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
   // write login functionality here using axios or fetch using post method and authenticate the user using authenticate() function and redirect to appraisal page if the credentials are correct without using useHistory() hook.
 
-
-
-
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const userDetails = {username, password}
-    const url = APPRAISAL_BASE_URL+"api/appraisalentry/employee_login"
+    const userDetails = { employee_id, password };
+    const url = APPRAISAL_BASE_URL + "api/appraisalentry/employee_login";
     const options = {
-      method: 'POST',
-      body: userDetails,
-    }
-    console.log("options",options)
-    const response = await fetch(url, options)
-    console.log("response",response)
-    const data = await response.json()
-    console.log("data",data)
-    if(data.status === 200){
-      authenticate(data, () => {
-        history.push("/appraisal");
-      });
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDetails),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    if (response.status === 200) {
+      history.push("/appraisal");
     }
   };
 
@@ -52,7 +47,7 @@ const Login = () => {
             <input
               type="text"
               name="username"
-              value={username}
+              value={employee_id}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
@@ -65,7 +60,9 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button">
+            Login
+          </button>
         </form>
       </div>
     </div>
