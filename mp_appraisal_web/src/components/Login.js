@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 // import { authenticate, isAuthenticated } from "./Authentication";
 import { APPRAISAL_BASE_URL } from "../config/config.environment";
+import { authenticate, isAuthenticated } from "./Authentication";
 const Login = () => {
   const [employee_id, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +35,9 @@ const Login = () => {
     const data = await response.json();
     // console.log(data,[data[0].employee_id]);
     localStorage.setItem("userRole", data[0].role);
+    localStorage.setItem("userId", data[0].employee_id);
     if (response.status === 200) {
+      authenticate();
       history.push("/appraisal");
     }
   };
