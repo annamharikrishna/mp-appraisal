@@ -10,18 +10,35 @@ import * as React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authenticate, isAuthenticated } from "./Authentication";
+import { APPRAISAL_BASE_URL } from "../config/config.environment";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  // write login functionality here using axios or fetch using post method and authenticate the user using authenticate() function and redirect to appraisal page if the credentials are correct without using useHistory() hook.
+
+
+
+
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin") {
-      authenticate(() => {
-        console.log("Login successful");
+    const userDetails = {username, password}
+    const url = APPRAISAL_BASE_URL+"api/appraisalentry/employee_login"
+    const options = {
+      method: 'POST',
+      body: userDetails,
+    }
+    console.log("options",options)
+    const response = await fetch(url, options)
+    console.log("response",response)
+    const data = await response.json()
+    console.log("data",data)
+    if(data.status === 200){
+      authenticate(data, () => {
+        history.push("/appraisal");
       });
-      history.push("/appraisal");
     }
   };
 

@@ -41,10 +41,10 @@ export class HttpAxiosService {
     //   : null;
     this.axiosInstance = axios.create({
       baseURL: this.baseURL,
-      withCredentials: true,
+    //   withCredentials: true,
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        Accept: "application/json;",
         // Authorization: `Bearer ${userToken}`,
       },
     });
