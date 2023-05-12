@@ -1,6 +1,6 @@
 // create Authentication.js file in src folder and add the following code:
 // // create authentication for login page
-export const authenticate = (callback) => {
+export const authenticate = () => {
     localStorage.setItem('isAuthenticated', true)
     console.log('authenticated')
     // callback()

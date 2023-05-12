@@ -6,24 +6,44 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import useAxios from '../hooks/useAxios'
 import { logout } from './Authentication'
+import { submitAppraisal } from './service'
 
 
-const Appraisal = () => {
-    const [productKnowledge, setProductKnowledge] = useState('')
-    const [systemKnowledge, setSystemKnowledge] = useState('')
-    const [salesPromotionSkills, setSalesPromotionSkills] = useState('')
-    const [privateLabelPromotionSkills, setPrivateLabelPromotionSkills] = useState('')
-    const [customerInteractionSkills, setCustomerInteractionSkills] = useState('')
-    const [overallRating, setOverallRating] = useState('')
+const Appraisal = ({location}) => {
+    const [productKnowledge, setProductKnowledge] = useState(location.state?.ProductKnowledge)
+    const [systemKnowledge, setSystemKnowledge] = useState(location.state?.systemKnowledge)
+    const [salesPromotionSkills, setSalesPromotionSkills] = useState(location.state?.salesPromotionSkills)
+    const [privateLabelPromotionSkills, setPrivateLabelPromotionSkills] = useState(location.state?.privateLabelPromotionSkills)
+    const [customerInteractionSkills, setCustomerInteractionSkills] = useState(location.state?.customerInteractionSkills)
+    const [overallRating, setOverallRating] = useState(location.state?.OverallRating)
     const history = useHistory()
     const [isOverallRating, setIsOverallRating] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
+    const [response, error, loading, axiosFetch, setError] = useAxios()
     const handleSubmit = (e) => {
+        console.log(e)
         e.preventDefault()
+        let data = {
+            employee_id: localStorage.getItem('employee_id'),
+            product_knowledge: productKnowledge,
+            system_knowledge: systemKnowledge,
+            sales_promotion_skills: salesPromotionSkills,
+            private_label_promotion_skills: privateLabelPromotionSkills,
+            customer_interaction_skills: customerInteractionSkills,
+            overall_rating: overallRating
+        }
+        axiosFetch(submitAppraisal(data))
+        
+        console.log(data)
         history.push('/dashboard')
     }
+
     useEffect(()=>{
+        console.log(location)
         let role= localStorage.getItem('userRole')
+        console.log(role && role==='employee')
         setIsOverallRating(role && role==='employee')
     }, [])
 
@@ -54,9 +74,10 @@ const Appraisal = () => {
                 </div>
                 <div>
                     <label>Overall Rating: </label>
-                    <input type="text" name="overallRating" disabled={isOverallRating} value={overallRating} onChange={(e) => setOverallRating(e.target.value)} />
+                    <input type="text" name="overallRating" disabled={!isOverallRating} value={overallRating} onChange={(e) => setOverallRating(e.target.value)} />
                 </div>
                 <button type="submit" className='submit'>Submit</button>
+                {submitted && <div className="submitted">Submitted Successfully</div>}
             </form>
             </div>
         </div>

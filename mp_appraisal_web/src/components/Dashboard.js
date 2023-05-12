@@ -56,13 +56,12 @@ const Dashboard = () => {
 
 
     const history = useHistory()
-    //  Now show eact object in a data as a card and give edit button which will redirect to the appraisal page and show the data of that object in the appraisal page. that card contains only userName and OverallRating
-    const handleEdit = (e) => {
-        history.push('/appraisal')
-    }
-    //  Now show eact object in a data as a card and give view button which will redirect to the appraisal page and show the data of that object in the appraisal page. that card contains all the data of that object.
-    const handleView = (e) => {
-        history.push('/appraisal')
+
+    const handleEdit = (data) => {
+        history.push({
+            pathname: '/appraisal',
+            state: data
+        })
     }
 
     return (
@@ -94,7 +93,7 @@ const Dashboard = () => {
                                     <p>Overall Rating: {item.OverallRating}</p>
                                 </div>
                                 <div className="card-footer">
-                                    <button onClick={handleEdit} className="edit-btn">Edit</button>
+                                    <button onClick={()=>handleEdit(item)} className="edit-btn">Edit</button>
                                     <button onClick={() => handlePopUp(item)} className="view-btn">View</button>
                                 </div>
                             </div>
