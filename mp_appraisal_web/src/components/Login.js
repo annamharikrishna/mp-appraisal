@@ -36,6 +36,7 @@ const Login = () => {
     // console.log(data,[data[0].employee_id]);
     localStorage.setItem("userRole", data[0].role);
     localStorage.setItem("userId", data[0].employee_id);
+    localStorage.setItem("employee_id", data[0].employee_id);
     if (response.status === 200) {
       authenticate();
       history.push("/appraisal");

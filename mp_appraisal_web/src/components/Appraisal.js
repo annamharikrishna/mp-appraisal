@@ -40,7 +40,7 @@ const Appraisal = ({location}) => {
         axiosFetch(submitAppraisal(data))
         
         console.log(data)
-        history.push('/dashboard')
+        // history.push('/dashboard')
     }
 
     useEffect(()=>{
@@ -49,7 +49,19 @@ const Appraisal = ({location}) => {
         console.log(role && role==='employee')
         setIsOverallRating(role && role==='employee')
     }, [])
-
+    useEffect(() => {
+        if(response?.message){
+            setProductKnowledge('')
+            setSystemKnowledge('')
+            setComments('')
+            setCustomerInteractionSkills('')
+            setPrivateLabelPromotionSkills('')
+            setSalesPromotionSkills('')
+            setOverallRating('')
+            
+            setSubmitted(true)
+        }
+    }, [response])
     return (
         <div className="appraisal-page">
             <div className = "appraisal-form">

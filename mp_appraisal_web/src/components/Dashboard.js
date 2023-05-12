@@ -64,7 +64,7 @@ const Dashboard = () => {
     // write to fetch data of getAllAppraisalFromData API using useEffect and store that data in a state.
     useEffect(() => {
         const userId = localStorage.getItem('userId')
-        axiosFetch(getAllApprialsFormsData({ user_id: userId }));
+        // axiosFetch(getAllApprialsFormsData({ user_id: userId }));
       }, []);
 
 
