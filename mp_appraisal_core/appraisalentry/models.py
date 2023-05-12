@@ -78,8 +78,8 @@ class EmployeeAppraisalForm(models.Model):
     comments = models.TextField()
     status = models.CharField(max_length=100, blank=False, null=False)
     reviewed_by = models.CharField(max_length=100, blank=False, null=False)
-    supervisor_rating = models.IntegerField(choices=CHOICES, default=1)
-    manager_rating = models.IntegerField(choices=CHOICES, default=1)
+    supervisor_rating = models.IntegerField(choices=CHOICES, default=1, null=True)
+    manager_rating = models.IntegerField(choices=CHOICES, default=1, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -33,12 +33,11 @@ const Header = () => {
       </div>
       <nav className="header-component" style={{ width: "60%" }}>
         <ul className="nav-list">
-          {userRole!=='employee' && <li>
+           <li>
             <Link to="/dashboard" className="nav-link">
               Dashboard
             </Link>
           </li>
-          }
           <li>
             <Link to="/appraisal" className="nav-link">
               Appraisal

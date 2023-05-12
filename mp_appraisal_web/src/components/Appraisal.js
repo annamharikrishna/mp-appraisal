@@ -22,6 +22,7 @@ const Appraisal = ({location}) => {
     const [isOverallRating, setIsOverallRating] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [response, error, loading, axiosFetch, setError] = useAxios()
+    const [comments, setComments] = useState('')
     const handleSubmit = (e) => {
         console.log(e)
         e.preventDefault()
@@ -32,7 +33,9 @@ const Appraisal = ({location}) => {
             sales_promotion_skills: salesPromotionSkills,
             private_label_promotion_skills: privateLabelPromotionSkills,
             customer_interaction_skills: customerInteractionSkills,
-            overall_rating: overallRating
+            overall_rating: overallRating,
+            user_id: localStorage.getItem('employee_id'),
+            comments: comments
         }
         axiosFetch(submitAppraisal(data))
         
@@ -75,6 +78,10 @@ const Appraisal = ({location}) => {
                 <div>
                     <label>Overall Rating: </label>
                     <input type="text" name="overallRating" disabled={!isOverallRating} value={overallRating} onChange={(e) => setOverallRating(e.target.value)} />
+                </div>
+                <div>
+                    <label>Comments: </label>
+                    <input type="text" name="overallRating" value={comments} onChange={(e) => setComments(e.target.value)} />
                 </div>
                 <button type="submit" className='submit'>Submit</button>
                 {submitted && <div className="submitted">Submitted Successfully</div>}
