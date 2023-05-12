@@ -101,14 +101,13 @@ class EmployeeAppraisalManager:
             employee_appraisal_form = employee_appraisal_form.filter(
                 created_at__range=[data.get('from_date'), data.get('to_date')])
         else:
-            if user_role == 'admin':
-                employee_appraisal_form = EmployeeAppraisalForm.objects.all()
-            elif user_role == 'manager':
-                employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee__role__in=['employee', 'supervisor'])
-            elif user_role == 'supervisor':
-                employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee__role='employee')
-            else:
-                raise Exception("unauthorized user role")
+            employee_appraisal_form = EmployeeAppraisalForm.objects.all()
+        if user_role == 'manager':
+            employee_appraisal_form = employee_appraisal_form.filter(employee__role__in=['employee', 'supervisor'])
+        elif user_role == 'supervisor':
+            employee_appraisal_form = employee_appraisal_form.filter(employee__role='employee')
+        elif user_role == 'employee':
+            raise Exception("unauthorized user role")
         return employee_appraisal_form.values()
 
     # create a registration function for employee using EmployeeSerializer
