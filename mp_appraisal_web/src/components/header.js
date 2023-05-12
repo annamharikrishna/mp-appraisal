@@ -6,6 +6,7 @@
 import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { logout } from "./Authentication";
+import medLogo from "../medLogo.svg";
 
 const Header = () => {
   const history = useHistory();
@@ -20,9 +21,10 @@ const Header = () => {
       {/* add Appraisal logo to the header */}
       <div className="logo">
         <img
-          src="https://www.appraisal360.co.uk/wp-content/uploads/2019/03/appraisal360-logo.png"
+          src={medLogo}
           alt="Appraisal Logo"
           onClick={() => history.push("/dashboard")}
+          className="appraisal-logo"
         />
       </div>
       <nav className="header-component" style={{ width: "60%" }}>
