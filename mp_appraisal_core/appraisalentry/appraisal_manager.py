@@ -91,15 +91,26 @@ class EmployeeAppraisalManager:
 
     @staticmethod
     def get_employee_appraisal(data):
-        employee_appraisal_form = EmployeeAppraisalForm.objects.all()
+        employee_appraisal_form = None
+        if data.get('user_id'):
+            user_role = Employee.objects.get(employee_id=data.get('user_id')).role
+        else:
+            raise Exception("User id is required")
         if data.get('employee_id'):
             employee = Employee.objects.get(employee_id=data.get('employee_id'))
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
-        if data.get('status'):
+        elif data.get('status'):
             employee_appraisal_form = employee_appraisal_form.filter(status=data.get('status'))
-        if data.get('from_date') and data.get('to_date'):
+        elif data.get('from_date') and data.get('to_date'):
             employee_appraisal_form = employee_appraisal_form.filter(
                 created_at__range=[data.get('from_date'), data.get('to_date')])
+        else:
+            if user_role == 'admin':
+                employee_appraisal_form = EmployeeAppraisalForm.objects.all()
+            elif user_role == 'manager':
+                employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee__role__in=['employee', 'supervisor'])
+            elif user_role == 'supervisor':
+                employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee__role='employee')
         return employee_appraisal_form.values()
 
     # create a registration function for employee using EmployeeSerializer
