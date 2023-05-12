@@ -19,6 +19,5 @@ export const isAuthenticated = () => {
 
 export const logout = (callback) => {
     localStorage.setItem('isAuthenticated', false)
-    callback()
 }
 //
