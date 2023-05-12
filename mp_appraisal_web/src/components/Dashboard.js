@@ -1,12 +1,14 @@
 // create a basic dashboard page
 // Solution:
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { logout } from './Authentication'
 //
 const Dashboard = () => {
     // create a random data list that contains 3 objects and each object of following keys userName, ProductKnowledge, systemKnowledge, salesPromotionSkills, privateLabelPromotionSkills, customerInteraction-Skills, Overall-Rating and values must be random numbers.
+    const [popUpData, setPopUpData] = useState({})
+    const [showPopup, setShowPopup] = useState(false)
     const [data, setData] = useState([
         {
             userName: 'user1',
@@ -40,22 +42,15 @@ const Dashboard = () => {
     // create a function that takes object as props that contains userName, ProductKnowledge, systemKnowledge, salesPromotionSkills, privateLabelPromotionSkills, customerInteraction-Skills, Overall-Rating and show them in a card as a pop up.
     const handlePopUp = (e) => {
         //  create a pop up that contains all the data of that object.
-        return (
-            <div className="popup">
-                <div className="popup-inner">
-                    <h1>{e.userName}</h1>
-                    <p>Product Knowledge: {e.ProductKnowledge}</p>
-                    <p>System Knowledge: {e.systemKnowledge}</p>
-                    <p>Sales Promotion Skills: {e.salesPromotionSkills}</p>
-                    <p>Private Label Promotion Skills: {e.privateLabelPromotionSkills}</p>
-                    <p>Customer Interaction Skills: {e.customerInteractionSkills}</p>
-                    <p>Overall Rating: {e.OverallRating}</p>
-                </div>
-            </div>
-        )
+        setPopUpData(e)
+        setShowPopup(true)
 
     }
-
+    useEffect(() => {
+        console.log(popUpData)
+        if (popUpData?.userName) {
+        }
+    }, [popUpData])
 
     const history = useHistory()
     //  Now show eact object in a data as a card and give edit button which will redirect to the appraisal page and show the data of that object in the appraisal page. that card contains only userName and OverallRating
@@ -66,9 +61,23 @@ const Dashboard = () => {
     const handleView = (e) => {
         history.push('/appraisal')
     }
-    
+
     return (
         <div className="dashboard-page">
+            {showPopup && <div className="popup">
+                <div className="popup-inner">
+                    <div className="popup-close" onClick={() => setShowPopup(false)}>X</div>
+                    <div className="popup-content">
+                        <h1>{popUpData?.userName}</h1>
+                        <p>Product Knowledge: {popUpData?.ProductKnowledge}</p>
+                        <p>System Knowledge: {popUpData?.systemKnowledge}</p>
+                        <p>Sales Promotion Skills: {popUpData?.salesPromotionSkills}</p>
+                        <p>Private Label Promotion Skills: {popUpData?.privateLabelPromotionSkills}</p>
+                        <p>Customer Interaction Skills: {popUpData?.customerInteractionSkills}</p>
+                        <p>Overall Rating: {popUpData?.OverallRating}</p>
+                    </div>
+                </div>
+            </div>}
             <div className="dashboard-form">
                 <h1>Dashboard</h1>
                 <div className="dashboard-cards">
@@ -83,7 +92,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="card-footer">
                                     <button onClick={handleEdit} className="edit-btn">Edit</button>
-                                    <button onClick={(item)=>handlePopUp(item)} className="view-btn">View</button>
+                                    <button onClick={() => handlePopUp(item)} className="view-btn">View</button>
                                 </div>
                             </div>
                         )
