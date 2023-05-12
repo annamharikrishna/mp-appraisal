@@ -64,3 +64,15 @@ class EmployeeLoginView(APIView):
         else:
             return Response({"message": 'Invalid Credentials'}, 401)
 
+
+# generate class level views for Downloading the Excel format employee appraisal data
+class EmployeeAppraisalDownloadView(APIView):
+
+    def get(self, request):
+        data = request.data
+        try:
+            response = EmployeeAppraisalManager().get_employee_appraisal(data)
+            response = EmployeeAppraisalManager().get_excel_response(response)
+        except Exception as error:
+            return Response(str(error), 500)
+        return response
