@@ -3,12 +3,21 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import useAxios from '../hooks/useAxios'
 import { logout } from './Authentication'
+import { getAllApprialsFormsData } from './service'
 //
 const Dashboard = () => {
     // create a random data list that contains 3 objects and each object of following keys userName, ProductKnowledge, systemKnowledge, salesPromotionSkills, privateLabelPromotionSkills, customerInteraction-Skills, Overall-Rating and values must be random numbers.
     const [popUpData, setPopUpData] = useState({})
     const [showPopup, setShowPopup] = useState(false)
+    const [
+        response,
+        error,
+        loading,
+        axiosFetch,
+        setError,
+      ] = useAxios();
     const [data, setData] = useState([
         {
             userName: 'user1',
@@ -52,14 +61,21 @@ const Dashboard = () => {
         }
     }, [popUpData])
 
+    // write to fetch data of getAllAppraisalFromData API using useEffect and store that data in a state.
+    useEffect(() => {
+        const userId = localStorage.getItem('userId')
+        // axiosFetch(getAllApprialsFormsData({ user_id: userId }));
+      }, []);
+
+
+
     const history = useHistory()
-    //  Now show eact object in a data as a card and give edit button which will redirect to the appraisal page and show the data of that object in the appraisal page. that card contains only userName and OverallRating
-    const handleEdit = (e) => {
-        history.push('/appraisal')
-    }
-    //  Now show eact object in a data as a card and give view button which will redirect to the appraisal page and show the data of that object in the appraisal page. that card contains all the data of that object.
-    const handleView = (e) => {
-        history.push('/appraisal')
+
+    const handleEdit = (data) => {
+        history.push({
+            pathname: '/appraisal',
+            state: data
+        })
     }
 
     return (
@@ -91,7 +107,7 @@ const Dashboard = () => {
                                     <p>Overall Rating: {item.OverallRating}</p>
                                 </div>
                                 <div className="card-footer">
-                                    <button onClick={handleEdit} className="edit-btn">Edit</button>
+                                    <button onClick={()=>handleEdit(item)} className="edit-btn">Edit</button>
                                     <button onClick={() => handlePopUp(item)} className="view-btn">View</button>
                                 </div>
                             </div>
@@ -105,5 +121,3 @@ const Dashboard = () => {
 
 }
 export default Dashboard
-
-
