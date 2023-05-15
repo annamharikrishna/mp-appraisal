@@ -43,6 +43,17 @@ const Header = () => {
               Appraisal
             </Link>
           </li>
+          <li>
+            <Link to="/register" className="nav-link">
+              Register
+            </Link>
+          </li>
+          {/* <li> to user detais page */}
+            <li>
+              <Link to="/userdetails" className="nav-link">
+                User Details
+              </Link>
+            </li>
         </ul>
         <button className="logout-btn" onClick={handleLogout}>
           {" "}
