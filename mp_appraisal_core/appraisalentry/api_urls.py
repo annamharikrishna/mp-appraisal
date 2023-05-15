@@ -12,4 +12,3 @@ urlpatterns = [
     path(r'get_employee', EmployeeRegistrationView.as_view(), name='get_employee'),
     path(r'employee_login', EmployeeLoginView.as_view(), name='employee_login'),
     ]
-

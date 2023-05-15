@@ -74,7 +74,7 @@ class EmployeeAppraisalForm(models.Model):
     sales_promotion_skills = models.IntegerField(choices=CHOICES, default=1)
     private_label_promotion_skills = models.IntegerField(choices=CHOICES, default=1)
     customer_interaction_skills = models.IntegerField(choices=CHOICES, default=1)
-    overall_rating = models.IntegerField(choices=CHOICES, default=1)
+    overall_rating = models.IntegerField(choices=CHOICES)
     comments = models.TextField()
     status = models.CharField(max_length=100, blank=False, null=False)
     reviewed_by = models.CharField(max_length=100, blank=False, null=False)
