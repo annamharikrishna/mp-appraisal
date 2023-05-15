@@ -51,10 +51,15 @@ const Header = () => {
           {/* <li> to user detais page */}
             <li>
               <Link to="/userdetails" className="nav-link">
-                User Details
+                Profile
               </Link>
             </li>
         </ul>
+        {/* add a search bar */ }
+        <div className="search-bar">
+          <input type="text" placeholder="Search" />
+        </div>
+        
         <button className="logout-btn" onClick={handleLogout}>
           {" "}
           Logout{" "}
