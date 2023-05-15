@@ -3,21 +3,17 @@
 // Solution:
 // create header.js file in src/components folder and add the following code:
 // // // create basic header component which contains the logout button, and the header component is used in the appraisal and dashboard pages
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { logout } from "./Authentication";
 import medLogo from "../medLogo.svg";
 
 const Header = () => {
   const history = useHistory();
-  const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
-  useEffect(()=>{
 
-  }, [])
   const handleLogout = () => {
     logout();
     history.push("/login");
-    localStorage.clear();
   };
 
   return (
@@ -33,7 +29,7 @@ const Header = () => {
       </div>
       <nav className="header-component" style={{ width: "60%" }}>
         <ul className="nav-list">
-           <li>
+          <li>
             <Link to="/dashboard" className="nav-link">
               Dashboard
             </Link>

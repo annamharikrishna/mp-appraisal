@@ -25,6 +25,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
