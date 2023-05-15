@@ -16,7 +16,7 @@ class EmployeeAppraisalManager:
     # 1. Employee can fill the appraisal form with status as 'Submitted' and role should be 'employee'
     # 2. Supervisor can update the 'Submitted' appraisal form with status as 'Supervisor Reviewed' and
     # role should be 'supervisor'
-    # 3. Manager can update the 'Supervisor Reviewed' appraisal form with status as 'Manager Reviewed' and
+    # 3. Manager can update the 'Super visor Reviewed' appraisal form with status as 'Manager Reviewed' and
     # role should be 'manager'
 
     def employee_appraisal(self, data):
