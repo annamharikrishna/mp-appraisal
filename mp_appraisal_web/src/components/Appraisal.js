@@ -101,6 +101,8 @@ const Appraisal = ({location}) => {
             </div>
         </div>
     )
+       
 }
 
 export default Appraisal
+

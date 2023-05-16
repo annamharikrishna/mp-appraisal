@@ -43,7 +43,23 @@ const Header = () => {
               Appraisal
             </Link>
           </li>
+          <li>
+            <Link to="/register" className="nav-link">
+              Register
+            </Link>
+          </li>
+          {/* <li> to user detais page */}
+            <li>
+              <Link to="/userdetails" className="nav-link">
+                Profile
+              </Link>
+            </li>
         </ul>
+        {/* add a search bar */ }
+        <div className="search-bar">
+          <input type="text" placeholder="Search" />
+        </div>
+        
         <button className="logout-btn" onClick={handleLogout}>
           {" "}
           Logout{" "}
