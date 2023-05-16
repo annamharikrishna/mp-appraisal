@@ -4,7 +4,6 @@ import AppRoutings from './components/AppRoutings';
 const App = () => {
   return (
     <div>
-      <Header />
       <AppRoutings/>
     </div>
   );

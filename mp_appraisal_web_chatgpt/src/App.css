@@ -17,16 +17,20 @@ body {
 
 /* Header Styles */
 
+/* Header Styles */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f8f8f8;
   padding: 20px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  z-index: 1;
 }
 
 .logo {
@@ -36,9 +40,14 @@ body {
   color: #333;
 }
 
+.logo:hover {
+  color: #555;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
+  align-items: center;
 }
 
 .nav-links li {
@@ -48,7 +57,42 @@ body {
 .nav-links li a {
   text-decoration: none;
   color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
+
+.nav-links li a:hover {
+  color: #555;
+}
+
+.logout-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.logout-link:hover {
+  color: #f44336;
+}
+
+.logout-link::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #f44336;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.logout-link:hover::before {
+  transform: scaleX(1);
+}
+
 
 /* Login Page Styles */
 
@@ -297,5 +341,75 @@ body {
 
   .close-icon {
     font-size: 20px;
+  }
+}
+
+/* Appraisal Form Styles */
+
+.appraisal-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  margin-top: 150px;
+}
+
+.appraisal-form h3 {
+  margin-top: 0;
+}
+
+.appraisal-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.appraisal-form input[type="number"] {
+  width: 50px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.appraisal-form input[type="number"]::-webkit-inner-spin-button,
+.appraisal-form input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.appraisal-form button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.appraisal-form button[type="submit"] {
+  background-color: #4285f4;
+}
+
+.appraisal-form button[type="button"] {
+  background-color: #ccc;
+}
+
+/* Responsive Styles */
+
+@media only screen and (max-width: 768px) {
+  /* Appraisal Form Styles */
+  .appraisal-form {
+    margin: 30px auto;
+    padding: 10px;
+  }
+
+  .appraisal-form input[type="number"] {
+    width: 40px;
+    padding: 5px;
+  }
+
+  .appraisal-form button {
+    padding: 8px 12px;
   }
 }

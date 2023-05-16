@@ -7,7 +7,6 @@ const AppraisalForm = () => {
   const [privateLabelPromotionSkills, setPrivateLabelPromotionSkills] = useState('');
   const [customerInteractionSkills, setCustomerInteractionSkills] = useState('');
   const [overallRating, setOverallRating] = useState('');
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
   
@@ -38,76 +37,60 @@ const AppraisalForm = () => {
         console.error(error);
       });
   };
-  
 
   return (
-    <div>
-      <h2>Employee Appraisal Form</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label>Product Knowledge:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={productKnowledge}
-            onChange={(e) => setProductKnowledge(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>System Knowledge:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={systemKnowledge}
-            onChange={(e) => setSystemKnowledge(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Sales Promotion Skills:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={salesPromotionSkills}
-            onChange={(e) => setSalesPromotionSkills(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Private Label Promotion Skills:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={privateLabelPromotionSkills}
-            onChange={(e) => setPrivateLabelPromotionSkills(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Customer Interaction Skills:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={customerInteractionSkills}
-            onChange={(e) => setCustomerInteractionSkills(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Overall Rating:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={overallRating}
-            onChange={(e) => setOverallRating(e.target.value)}
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <form className="appraisal-form" onSubmit={handleFormSubmit}>
+      <h3>Employee Appraisal</h3>
+      <label htmlFor="productKnowledge">Product Knowledge:</label>
+      <input
+        type="number"
+        id="productKnowledge"
+        className="input-field"
+        value={productKnowledge}
+        onChange={(e) => setProductKnowledge(e.target.value)}
+      />
+
+      <label htmlFor="systemKnowledge">System Knowledge:</label>
+      <input
+        type="number"
+        id="systemKnowledge"
+        className="input-field"
+        value={systemKnowledge}
+        onChange={(e) => setSystemKnowledge(e.target.value)}
+      />
+
+      <label htmlFor="salesPromotionSkills">Sales Promotion Skills:</label>
+      <input
+        type="number"
+        id="salesPromotionSkills"
+        className="input-field"
+        value={salesPromotionSkills}
+        onChange={(e) => setSalesPromotionSkills(e.target.value)}
+      />
+
+      <label htmlFor="privateLabelPromotionSkills">Private Label Promotion Skills:</label>
+      <input
+        type="number"
+        id="privateLabelPromotionSkills"
+        className="input-field"
+        value={privateLabelPromotionSkills}
+        onChange={(e) => setPrivateLabelPromotionSkills(e.target.value)}
+      />
+
+      <label htmlFor="customerInteractionSkills">Customer Interaction Skills:</label>
+      <input
+        type="number"
+        id="customerInteractionSkills"
+        className="input-field"
+        value={customerInteractionSkills}
+        onChange={(e) => setCustomerInteractionSkills(e.target.value)}
+      />
+      <br />
+      <button type="submit" className="submit-btn" >Submit</button>
+    </form>
   );
 };
 
 export default AppraisalForm;
+
+

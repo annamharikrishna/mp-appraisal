@@ -9,7 +9,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Fetch appraisals from the API and update the state
-    fetchAppraisals();
+    // fetchAppraisals();
   }, []);
 
   const fetchAppraisals = () => {
