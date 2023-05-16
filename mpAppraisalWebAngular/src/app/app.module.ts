@@ -10,6 +10,11 @@ import { MatInputModule} from '@angular/material/input';
 import { MatTableModule} from '@angular/material/table';
 import { MatCardModule} from '@angular/material/card';
 import { MatSortModule} from '@angular/material/sort';
+// Import Mat date picker module
+import { MatDatepickerModule } from '@angular/material/datepicker';
+// Import Mat native date module
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 // Import BrowserAnimationsModule
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -46,6 +51,10 @@ import { NavComponent } from './nav/nav.component';
     MatTableModule,
     MatCardModule,
     MatSortModule,
+    // Add Mat date picker module
+    MatDatepickerModule,
+    MatSelectModule,
+    MatNativeDateModule,
     HttpClientModule
   ],
   providers: [],

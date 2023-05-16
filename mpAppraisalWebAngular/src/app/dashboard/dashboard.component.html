@@ -1,1 +1,72 @@
-<p>dashboard works!</p>
+<!-- Create dashboard template with filters with following selections -->
+<!-- 1. Status(Dropdown) -->
+<!-- 2. From Date -->
+<!-- 3. To Date -->
+
+<!-- Path: src/app/dashboard/dashboard.component.html -->
+<!-- Compare this snippet from src/app/dashboard/dashboard.component.html: -->
+
+<div class="example-container">
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="status" (selectionChange)="onStatusChange($event)">
+            <mat-option *ngFor="let status of statusList" [value]="status">
+                {{status}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>From Date</mat-label>
+        <input matInput [matDatepicker]="picker" (dateChange)="onFromDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>To Date</mat-label>
+        <input matInput [matDatepicker]="picker1" (dateChange)="onToDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+</div>
+<div class="example-container">
+    <mat-table #table [dataSource]="appraisalData">
+        <ng-container matColumnDef="employee_id">
+            <mat-header-cell *matHeaderCellDef> Employee Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.employee_id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="product_knowledge">
+            <mat-header-cell *matHeaderCellDef> Product Knowledge </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.product_knowledge}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="system_knowledge">
+            <mat-header-cell *matHeaderCellDef> System Knowledge </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.system_knowledge}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="sales_promotion_skills">
+            <mat-header-cell *matHeaderCellDef> Sales Promotion Skills </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.sales_promotion_skills}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="private_label_promotion_skills">
+            <mat-header-cell *matHeaderCellDef> Private Label Promotion Skills </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.private_label_promotion_skills}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="customer_interaction_skills">
+            <mat-header-cell *matHeaderCellDef> Customer Interaction Skills </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.customer_interaction_skills}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="overall_rating">
+            <mat-header-cell *matHeaderCellDef> Overall Rating </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.overall_rating}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="comments">
+            <mat-header-cell *matHeaderCellDef> Comments </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.comments}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+</div>
