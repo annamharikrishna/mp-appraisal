@@ -7,6 +7,8 @@ import Dashboard from '../components/Dashboard'
 // import Logout from './components/Logout'
 import { isAuthenticated } from '../components/Authentication'
 import Header from '../components/header'
+import Registration from '../components/Registration'
+import UserDetails from '../components/UserDetails'
 
 const Approutings = () => {
     const PrivateRoute = (props) => {
@@ -25,7 +27,9 @@ const Approutings = () => {
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute path="/appraisal" component={Appraisal} />
                     <PrivateRoute path="/dashboard" component={Dashboard} />
+                    <PrivateRoute path="/register" component={Registration} />
                     {/* <PrivateRoute path="/logout" component={Logout} /> */}
+                    <PrivateRoute path="/userdetails" component={UserDetails} />
                 </Switch>
             </Router>
         </div>
