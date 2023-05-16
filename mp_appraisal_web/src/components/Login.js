@@ -10,17 +10,29 @@ import * as React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authenticate, isAuthenticated } from "./Authentication";
+import { APPRAISAL_BASE_URL } from "../config/config.environment";
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [employee_id, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin") {
-      authenticate(() => {
-        console.log("Login successful");
-      });
+    const userDetails = { employee_id, password };
+    const url = APPRAISAL_BASE_URL + "api/appraisalentry/employee_login";
+    const options = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDetails),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    localStorage.setItem("userId", data[0].employee_id);
+    if (response.status === 200) {
+      authenticate();
       history.push("/appraisal");
     }
   };
@@ -35,7 +47,7 @@ const Login = () => {
             <input
               type="text"
               name="username"
-              value={username}
+              value={employee_id}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
