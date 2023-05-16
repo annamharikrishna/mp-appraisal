@@ -100,9 +100,9 @@ class EmployeeAppraisalManager:
             employee = Employee.objects.get(employee_id=data.get('employee_id'))
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
         elif data.get('status'):
-            employee_appraisal_form = employee_appraisal_form.filter(status=data.get('status'))
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(status=data.get('status'))
         elif data.get('from_date') and data.get('to_date'):
-            employee_appraisal_form = employee_appraisal_form.filter(
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(
                 created_at__range=[data.get('from_date'), data.get('to_date')])
         else:
             employee_appraisal_form = EmployeeAppraisalForm.objects.all()

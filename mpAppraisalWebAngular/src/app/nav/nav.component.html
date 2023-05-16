@@ -8,9 +8,10 @@ Form entry -->
 <div>
     <mat-toolbar color="primary">
         <span>Appraisal System</span>
+        <button mat-button *ngIf="isLoggedIn()" routerLink="/dashboard">Dashboard</button>
+        <button mat-button *ngIf="isLoggedIn()" routerLink="/appraisalentry">Form Entry</button>
+        <!-- add a span where login and logout buttons tilts to right -->
         <span class="example-spacer"></span>
-        <button mat-button routerLink="/dashboard">Dashboard</button>
-        <button mat-button routerLink="/appraisalentry">Form Entry</button>
         <!-- add a login and logout button using ngIf  -->
         <button mat-button *ngIf="!isLoggedIn()" routerLink="/login">Login</button>
         <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>

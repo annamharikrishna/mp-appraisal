@@ -8,9 +8,9 @@
     <mat-card-title>Employee Login</mat-card-title>
     <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
-            <input matInput  formControlName="username" required>
+            <input matInput  formControlName="employee_id" required>
             <span matSuffix style="padding-right:40px !important"></span>
-            <mat-error *ngIf="username.hasError('required')">
+            <mat-error *ngIf="employee_id.hasError('required')">
                 This Field is Required 
             </mat-error>
     </mat-form-field>
