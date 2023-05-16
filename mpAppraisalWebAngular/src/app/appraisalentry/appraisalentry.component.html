@@ -1,0 +1,57 @@
+<div>
+    <mat-card class="mx-auto mt-5 " style="width: 400px; margin-left: 40%; margin-top: 10%">
+    <form [formGroup]="appraisalForm" style="margin-left:10%">
+    <mat-card-title>Employee Appraisal Form</mat-card-title>
+    <mat-form-field appearance="outline">
+            <mat-label>Product Knowledge</mat-label>
+            <input matInput  formControlName="product_knowledge" required>
+            <span matSuffix style="padding-right:40px !important"></span>
+            <mat-error *ngIf="product_knowledge.hasError('required')">
+                This Field is Required 
+            </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>System Knowledge</mat-label>
+        <input matInput  formControlName="system_knowledge" required>
+        <span matSuffix style="padding-right:40px !important"></span>
+        <mat-error *ngIf="system_knowledge.hasError('required')">
+            This Field is Required 
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Sales Promotion Skills</mat-label>
+        <input matInput  formControlName="sales_promotion_skills" required>
+        <span matSuffix style="padding-right:40px !important"></span>
+        <mat-error *ngIf="sales_promotion_skills.hasError('required')">
+            This Field is Required 
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Private Label Promotion Skills</mat-label>
+        <input matInput  formControlName="private_label_promotion_skills" required>
+        <span matSuffix style="padding-right:40px !important"></span>
+        <mat-error *ngIf="private_label_promotion_skills.hasError('required')">
+            This Field is Required 
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+            <mat-label>Customer Interaction Skills</mat-label>
+            <input matInput formControlName="customer_interaction_skills" required>
+            <mat-error *ngIf="customer_interaction_skills.hasError('required')">
+                This Field is Required 
+            </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Overall Rating</mat-label>
+        <input matInput formControlName="overall_rating" required>
+        <mat-error *ngIf="overall_rating.hasError('required')">
+            This Field is Required 
+        </mat-error>
+</mat-form-field>
+    <div>
+            <button class="text-center"  mat-raised-button color="primary" (click)="onSubmit()" 
+            [disabled]="!appraisalForm.valid">Submit</button>
+    </div>
+    </form>
+</mat-card>
+</div>

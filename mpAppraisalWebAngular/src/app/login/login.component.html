@@ -1,0 +1,29 @@
+<!-- Create a login template with form fields defined in login.component.ts and call login function on submit -->
+<!-- add possible custom validations  in login.component.ts and login.component.html-->
+<!-- Path: src/app/login/login.component.html -->
+<!-- Compare this snippet from src/app/login/login.component.html: -->
+<div>
+    <mat-card class="mx-auto mt-5 " style="width: 400px; margin-left: 40%; margin-top: 10%">
+    <form [formGroup]="loginForm" style="margin-left:10%">
+    <mat-card-title>Employee Login</mat-card-title>
+    <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput  formControlName="username" required>
+            <span matSuffix style="padding-right:40px !important"></span>
+            <mat-error *ngIf="username.hasError('required')">
+                This Field is Required 
+            </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput  formControlName="password" required>
+        <span matSuffix style="padding-right:40px !important"></span>
+        <mat-error *ngIf="password.hasError('required')">
+            This Field is Required 
+        </mat-error>
+    </mat-form-field>
+    <div>
+            <button class="text-center"  mat-raised-button color="primary" (click)="login()" 
+            [disabled]="!loginForm.valid">Login</button>
+    </div>
+    </form>

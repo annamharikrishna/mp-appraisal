@@ -1,0 +1,18 @@
+<!-- create a header with following options :
+Dashboard
+Form entry -->
+
+<!-- Path: src/app/nav/nav.component.ts -->
+<!-- Compare this snippet from src/app/appraisalentry/appraisalentry.component.ts: -->
+
+<div>
+    <mat-toolbar color="primary">
+        <span>Appraisal System</span>
+        <span class="example-spacer"></span>
+        <button mat-button routerLink="/dashboard">Dashboard</button>
+        <button mat-button routerLink="/appraisalentry">Form Entry</button>
+        <!-- add a login and logout button using ngIf  -->
+        <button mat-button *ngIf="!isLoggedIn()" routerLink="/login">Login</button>
+        <button mat-button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+    </mat-toolbar>
+</div>
