@@ -365,7 +365,7 @@ body {
 }
 
 .appraisal-form input[type="number"] {
-  width: 50px;
+  width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -394,7 +394,9 @@ body {
 .appraisal-form button[type="button"] {
   background-color: #ccc;
 }
-
+.error-message{
+  color: red;
+}
 /* Responsive Styles */
 
 @media only screen and (max-width: 768px) {

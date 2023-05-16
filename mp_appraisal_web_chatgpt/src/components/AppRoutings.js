@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import Appraisal from './Appraisals';
+import AppraisalForm from './Appraisals';
 import LoginPage from './Login';
 import Header from './Header';
 
@@ -35,7 +35,7 @@ const AppRouter = () => {
                 />
                 <ProtectedRoute
                     path="/appraisal"
-                    component={Appraisal}
+                    component={AppraisalForm}
                     isAuthenticated={isAuthenticated}
                 />
                 <Redirect to="/login" />
