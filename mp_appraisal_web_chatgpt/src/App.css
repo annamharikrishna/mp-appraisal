@@ -352,7 +352,7 @@ body {
   padding: 20px;
   background-color: #f8f8f8;
   border-radius: 4px;
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 .appraisal-form h3 {
@@ -365,7 +365,7 @@ body {
 }
 
 .appraisal-form input[type="number"] {
-  width: 50px;
+  width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -394,7 +394,9 @@ body {
 .appraisal-form button[type="button"] {
   background-color: #ccc;
 }
-
+.error-message{
+  color: red;
+}
 /* Responsive Styles */
 
 @media only screen and (max-width: 768px) {
