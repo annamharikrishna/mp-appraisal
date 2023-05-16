@@ -85,6 +85,14 @@ const AppraisalForm = () => {
         value={customerInteractionSkills}
         onChange={(e) => setCustomerInteractionSkills(e.target.value)}
       />
+      <label htmlFor="overAllRating">Overall Rating</label>
+      <input
+        type="number"
+        id="overAllRating"
+        className="input-field"
+        value={overallRating}
+        onChange={(e) => setOverallRating(e.target.value)}
+      />
       <br />
       <button type="submit" className="submit-btn" >Submit</button>
     </form>
