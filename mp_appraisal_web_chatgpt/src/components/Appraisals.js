@@ -4,13 +4,13 @@ import { useForm, Controller } from 'react-hook-form';
 const AppraisalForm = () => {
   const { handleSubmit, control, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
+  const handleFormSubmit = (data) => {
     // Handle form submission
     console.log(data);
   };
 
   return (
-    <form className="appraisal-form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="appraisal-form" onSubmit={handleSubmit(handleFormSubmit)}>
       <h3>Employee Appraisal</h3>
       <div className="form-group">
         <label htmlFor="productKnowledge">Product Knowledge:</label>
