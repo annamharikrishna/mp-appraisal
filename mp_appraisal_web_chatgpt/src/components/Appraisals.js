@@ -4,33 +4,13 @@ import { useForm, Controller } from 'react-hook-form';
 const AppraisalForm = () => {
   const { handleSubmit, control, formState: { errors } } = useForm();
 
-  const handleFormSubmit = (e) => {
-    // e.preventDefault();
-
-    
-    console.log(e)
-
-    // fetch('https://example.com/get_employee_appraisal_form', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     // Handle the API response as needed
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     // Handle any error that occurred during the API call
-    //     console.error(error);
-    //   });
+  const onSubmit = (data) => {
+    // Handle form submission
+    console.log(data);
   };
 
-
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="appraisal-form">
+    <form className="appraisal-form" onSubmit={handleSubmit(onSubmit)}>
       <h3>Employee Appraisal</h3>
       <div className="form-group">
         <label htmlFor="productKnowledge">Product Knowledge:</label>
@@ -40,18 +20,24 @@ const AppraisalForm = () => {
           defaultValue=""
           rules={{ required: 'Product Knowledge is required' }}
           render={({ field }) => (
-            <input
-              type="number"
+            <select
               id="productKnowledge"
-              className={errors.productKnowledge ? 'input-field error' : 'input-field'}
+              className={`form-control ${errors.productKnowledge ? 'is-invalid' : ''}`}
               {...field}
-            />
+            >
+              <option value="">Select a rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           )}
         />
         {errors.productKnowledge && <span className="error-message">{errors.productKnowledge.message}</span>}
       </div>
 
-      <div>
+      <div className="form-group">
         <label htmlFor="systemKnowledge">System Knowledge:</label>
         <Controller
           name="systemKnowledge"
@@ -59,18 +45,24 @@ const AppraisalForm = () => {
           defaultValue=""
           rules={{ required: 'System Knowledge is required' }}
           render={({ field }) => (
-            <input
-              type="number"
+            <select
               id="systemKnowledge"
-              className={errors.systemKnowledge ? 'input-field error' : 'input-field'}
+              className={`form-control ${errors.systemKnowledge ? 'is-invalid' : ''}`}
               {...field}
-            />
+            >
+              <option value="">Select a rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           )}
         />
         {errors.systemKnowledge && <span className="error-message">{errors.systemKnowledge.message}</span>}
       </div>
 
-      <div>
+      <div className="form-group">
         <label htmlFor="salesPromotionSkills">Sales Promotion Skills:</label>
         <Controller
           name="salesPromotionSkills"
@@ -78,37 +70,49 @@ const AppraisalForm = () => {
           defaultValue=""
           rules={{ required: 'Sales Promotion Skills is required' }}
           render={({ field }) => (
-            <input
-              type="number"
+            <select
               id="salesPromotionSkills"
-              className={errors.salesPromotionSkills ? 'input-field error' : 'input-field'}
+              className={`form-control ${errors.salesPromotionSkills ? 'is-invalid' : ''}`}
               {...field}
-            />
+            >
+              <option value="">Select a rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           )}
         />
         {errors.salesPromotionSkills && <span className="error-message">{errors.salesPromotionSkills.message}</span>}
       </div>
 
-      <div>
+      <div className="form-group">
         <label htmlFor="privateLabelPromotionSkills">Private Label Promotion Skills:</label>
         <Controller
           name="privateLabelPromotionSkills"
           control={control}
           defaultValue=""
           rules={{ required: 'Private Label Promotion Skills is required' }}
+
           render={({ field }) => (
-            <input
-              type="number"
+            <select
               id="privateLabelPromotionSkills"
-              className={errors.privateLabelPromotionSkills ? 'input-field error' : 'input-field'}
+              className={`form-control ${errors.privateLabelPromotionSkills ? 'is-invalid' : ''}`}
               {...field}
-            />
+            >
+              <option value="">Select a rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           )}
         />
         {errors.privateLabelPromotionSkills && <span className="error-message">{errors.privateLabelPromotionSkills.message}</span>}
       </div>
-
-      <div>
+      <div className="form-group">
         <label htmlFor="customerInteractionSkills">Customer Interaction Skills:</label>
         <Controller
           name="customerInteractionSkills"
@@ -116,48 +120,51 @@ const AppraisalForm = () => {
           defaultValue=""
           rules={{ required: 'Customer Interaction Skills is required' }}
           render={({ field }) => (
-            <input
-              type="number"
+            <select
               id="customerInteractionSkills"
-              className={errors.customerInteractionSkills ? 'input-field error' : 'input-field'}
+              className={`form-control ${errors.customerInteractionSkills ? 'is-invalid' : ''}`}
               {...field}
-            />
+            >
+              <option value="">Select a rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           )}
         />
         {errors.customerInteractionSkills && <span className="error-message">{errors.customerInteractionSkills.message}</span>}
       </div>
 
-      <div>
-        <label htmlFor="overallRating">Overall Rating (1-5):</label>
+      <div className="form-group">
+        <label htmlFor="overallRating">Overall Rating:</label>
         <Controller
           name="overallRating"
           control={control}
           defaultValue=""
-          rules={{
-            required: 'Overall Rating is required',
-            min: {
-              value: 1,
-              message: 'Overall Rating must be at least 1',
-            },
-            max: {
-              value: 5,
-              message: 'Overall Rating must be at most 5',
-            },
-          }}
+          rules={{ required: 'Overall Rating is required' }}
           render={({ field }) => (
-            <input
-              type="number"
+            <select
               id="overallRating"
-              className={errors.overallRating ? 'input-field error' : 'input-field'}
+              className={`form-control ${errors.overallRating ? 'is-invalid' : ''}`}
               {...field}
-            />
+            >
+              <option value="">Select a rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           )}
         />
         {errors.overallRating && <span className="error-message">{errors.overallRating.message}</span>}
       </div>
-      <button type="submit">Submit</button>
+
+      <button type="submit" className="btn btn-primary">Submit</button>
     </form>
   );
-};
+}
 
 export default AppraisalForm;
