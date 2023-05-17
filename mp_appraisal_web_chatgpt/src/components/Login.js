@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { APPRAISAL_BASE_URL } from "../config/config.environment";
 
 const LoginPage = () => {
   const [employee_id, setUsername] = useState("");
@@ -9,7 +10,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const userDetails = { employee_id, password };
-    const url = "http://127.0.0.1:8000/" + "api/appraisalentry/employee_login";
+    const url = APPRAISAL_BASE_URL + "api/appraisalentry/employee_login";
     const options = {
       method: "POST",
       headers: {
@@ -23,7 +24,7 @@ const LoginPage = () => {
     localStorage.setItem("userId", data[0].employee_id);
     if (response.status === 200) {
       localStorage.setItem("isAuthenticated", true);
-      history.push("/appraisal");
+      history.push("/dashboard");
     }
   };
 

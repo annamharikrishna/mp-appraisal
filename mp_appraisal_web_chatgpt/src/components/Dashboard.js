@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Popup from "./Popup";
 import EditForm from "./EditForm";
+import { APPRAISAL_BASE_URL } from "../config/config.environment";
 
 const Dashboard = () => {
   const [appraisals, setAppraisals] = useState([]);
@@ -16,8 +18,7 @@ const Dashboard = () => {
     // Make an API call to retrieve the appraisals list
     // Replace 'https://api.example.com/appraisals' with your actual API endpoint
 
-    const apiUrl =
-      "http://127.0.0.1:8000/api/appraisalentry/get_employee_appraisal_form";
+    const apiUrl = APPRAISAL_BASE_URL + "api/appraisalentry/get_employee_appraisal_form";
     const params = {
       user_id: localStorage.getItem("userId"),
     };
@@ -51,8 +52,14 @@ const Dashboard = () => {
     setSelectedAppraisal(null);
   };
 
-  const editAppraisal = () => {
+  const history = useHistory();
+
+  const editAppraisal = (data) => {
     setEditingMode(true);
+    history.push({
+      pathname: "/appraisal",
+      state: data,
+    });
     closePopup();
   };
 
@@ -69,7 +76,7 @@ const Dashboard = () => {
           <p>Overall Rating: {appraisal.overall_rating}</p>
           <div className="btn-container">
             <button onClick={() => openPopup(appraisal)}>View</button>
-            <button onClick={() => editAppraisal()}>Edit</button>
+            <button onClick={() => editAppraisal(appraisal)}>Edit</button>
           </div>
         </div>
       ))}

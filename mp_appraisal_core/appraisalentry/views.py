@@ -12,7 +12,7 @@ from .appraisal_manager import EmployeeAppraisalManager
 class EmployeeAppraisalView(APIView):
 
     def post(self, request):
-        data = request.query_params
+        data = request.data
         try:
             pass
             response = EmployeeAppraisalManager().employee_appraisal(data)
