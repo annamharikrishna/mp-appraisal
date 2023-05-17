@@ -21,10 +21,32 @@ const LoginPage = () => {
     };
     const response = await fetch(url, options);
     const data = await response.json();
-    localStorage.setItem("userId", data[0].employee_id);
+
     if (response.status === 200) {
       localStorage.setItem("isAuthenticated", true);
-      history.push("/dashboard");
+      let role, employee_id, id;
+      if (data.length === 2) {
+        employee_id = data[0].employee_id;
+        role = data[0].role;
+        id = data[0].id;
+      }
+      else {
+        role = data['role'];
+        employee_id = data['employee_id'];
+        id = data['id'];
+      }
+      
+      localStorage.setItem("user_id", employee_id);
+      localStorage.setItem("employee_id", id);
+      localStorage.setItem("role", role);
+      if (role === "employee") {
+        history.push({
+          pathname: "/appraisal",
+          state: data[1],
+        });
+      } else {
+        history.push("/dashboard");
+      }
     }
   };
 

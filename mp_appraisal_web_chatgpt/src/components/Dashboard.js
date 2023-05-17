@@ -20,7 +20,7 @@ const Dashboard = () => {
 
     const apiUrl = APPRAISAL_BASE_URL + "api/appraisalentry/get_employee_appraisal_form";
     const params = {
-      user_id: localStorage.getItem("userId"),
+      user_id: localStorage.getItem("user_id"),
     };
 
     // Convert the params object into a query string

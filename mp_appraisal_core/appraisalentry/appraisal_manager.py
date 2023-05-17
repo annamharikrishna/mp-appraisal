@@ -24,34 +24,50 @@ class EmployeeAppraisalManager:
         employee_appraisal_form = None
         employee = Employee.objects.get(id=data.get('employee_id'))
         user = Employee.objects.get(employee_id=data.get('user_id'))
-        if user.role == 'employee':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.create(
-                employee=employee,
-                product_knowledge=data.get('product_knowledge'),
-                system_knowledge=data.get('system_knowledge'),
-                sales_promotion_skills=data.get('sales_promotion_skills'),
-                private_label_promotion_skills=data.get('private_label_promotion_skills'),
-                customer_interaction_skills=data.get('customer_interaction_skills'),
-                comments=data.get('comments'),
-                status='Submitted',
-                supervisor_rating=data.get('supervisor_rating'),
-                manager_rating=data.get('manager_rating')
-            )
-        elif user.role == 'supervisor':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
-            if employee_appraisal_form.status == 'Submitted':
+        if data.get('employee_id') == str(user.id) or user.role == 'employee':
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
+            if employee_appraisal_form:
+                employee_appraisal_form = EmployeeAppraisalForm.objects.update(
+                    employee=employee,
+                    product_knowledge=data.get('productKnowledge'),
+                    system_knowledge=data.get('systemKnowledge'),
+                    sales_promotion_skills=data.get('salesPromotionSkills'),
+                    private_label_promotion_skills=data.get('privateLabelPromotionSkills'),
+                    customer_interaction_skills=data.get('customerInteractionSkills'),
+                    comments=data.get('comments'),
+                    status='Submitted',
+                    supervisor_rating=data.get('supervisorRating'),
+                    manager_rating=data.get('managerRating'),
+                    overall_rating=data.get('overallRating')
+                )
+            else:
                 employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                     employee=employee,
                     product_knowledge=data.get('productKnowledge'),
                     system_knowledge=data.get('systemKnowledge'),
                     sales_promotion_skills=data.get('salesPromotionSkills'),
-                    private_label_promotion_skills=data.get('privateLabel_promotionSkills'),
+                    private_label_promotion_skills=data.get('privateLabelPromotionSkills'),
+                    customer_interaction_skills=data.get('customerInteractionSkills'),
+                    comments=data.get('comments'),
+                    status='Submitted',
+                    supervisor_rating=data.get('supervisorRating'),
+                    manager_rating=data.get('managerRating'),
+                    overall_rating=data.get('overallRating')
+                )
+        elif user.role == 'supervisor':
+            employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
+            if employee_appraisal_form.status == 'Submitted':
+                employee_appraisal_form = EmployeeAppraisalForm.objects.update(
+                    employee=employee,
+                    product_knowledge=data.get('productKnowledge'),
+                    system_knowledge=data.get('systemKnowledge'),
+                    sales_promotion_skills=data.get('salesPromotionSkills'),
+                    private_label_promotion_skills=data.get('privateLabelPromotionSkills'),
                     customer_interaction_skills=data.get('customerInteractionSkills'),
                     comments=data.get('comments'),
                     status='Supervisor Reviewed',
                     supervisor_rating=data.get('supervisorRating'),
-                    overall_rating=data.get('overallRating'),
-                    reviewed_by=user
+                    overall_rating=data.get('overallRating')
                 )
                 """ Copilot suggestion
                 employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=data.get('employee_id')).update(
@@ -62,18 +78,17 @@ class EmployeeAppraisalManager:
         elif user.role == 'manager':
             employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
             if employee_appraisal_form.status == 'Supervisor Reviewed':
-                employee_appraisal_form = EmployeeAppraisalForm.objects.create(
+                employee_appraisal_form = EmployeeAppraisalForm.objects.update(
                     employee=employee,
-                    product_knowledge=data.get('product_knowledge'),
-                    system_knowledge=data.get('system_knowledge'),
-                    sales_promotion_skills=data.get('sales_promotion_skills'),
-                    private_label_promotion_skills=data.get('private_label_promotion_skills'),
-                    customer_interaction_skills=data.get('customer_interaction_skills'),
+                    product_knowledge=data.get('productKnowledge'),
+                    system_knowledge=data.get('systemKnowledge'),
+                    sales_promotion_skills=data.get('salesPromotionSkills'),
+                    private_label_promotion_skills=data.get('privateLabelPromotionSkills'),
+                    customer_interaction_skills=data.get('customerInteractionSkills'),
                     comments=data.get('comments'),
                     status='Manager Reviewed',
-                    manager_rating=data.get('manager_rating'),
-                    overall_rating=data.get('overall_rating'),
-                    reviewed_by=user
+                    manager_rating=data.get('managerRating'),
+                    overall_rating=data.get('overallRating')
                 )
             else:
                 raise Exception("Supervisor has not reviewed the appraisal form")
@@ -137,9 +152,13 @@ class EmployeeAppraisalManager:
     @staticmethod
     def employee_login(data):
         employee = Employee.objects.filter(employee_id=data.get('employee_id'),
-                                           password=data.get('password')).values()
-        if employee:
-            return employee
+                                           password=data.get('password'))
+        employee_details = employee.values().first()
+        if employee_details:
+            if employee_details.get('role') == "employee":
+                employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee[0]).values().first()
+                return employee_details, employee_appraisal_form
+            return employee_details
         else:
             return False
 
