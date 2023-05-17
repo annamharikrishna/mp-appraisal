@@ -3,7 +3,7 @@
 # Compare this snippet from appraisalentry/urls.py:
 from django.urls import path
 
-from .views import EmployeeAppraisalView, EmployeeRegistrationView, EmployeeLoginView
+from .views import EmployeeAppraisalView, EmployeeRegistrationView, EmployeeLoginView, EmployeeAppraisalDownloadView
 
 urlpatterns = [
     path(r'employee_appraisal', EmployeeAppraisalView.as_view(), name='employee_appraisal'),
@@ -11,4 +11,6 @@ urlpatterns = [
     path(r'employee_registration', EmployeeRegistrationView.as_view(), name='employee_registration'),
     path(r'get_employee', EmployeeRegistrationView.as_view(), name='get_employee'),
     path(r'employee_login', EmployeeLoginView.as_view(), name='employee_login'),
+    # add a path for download api call
+    path(r'download_appraisal_data', EmployeeAppraisalDownloadView.as_view(), name='download')
     ]
