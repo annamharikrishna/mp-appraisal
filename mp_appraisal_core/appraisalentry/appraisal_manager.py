@@ -168,7 +168,7 @@ class EmployeeAppraisalManager:
     def convert_to_excel(data):
 
         output = io.BytesIO()
-        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True, 'remove_timezone': True})
         worksheet = workbook.add_worksheet()
         row = 0
         col = 0
