@@ -22,7 +22,7 @@ class EmployeeAppraisalManager:
     @staticmethod
     def employee_appraisal(data):
         employee_appraisal_form = None
-        employee = Employee.objects.get(employee_id=data.get('employee_id'))
+        employee = Employee.objects.get(id=data.get('employee_id'))
         user = Employee.objects.get(employee_id=data.get('user_id'))
         if user.role == 'employee':
             employee_appraisal_form = EmployeeAppraisalForm.objects.create(
@@ -42,15 +42,15 @@ class EmployeeAppraisalManager:
             if employee_appraisal_form.status == 'Submitted':
                 employee_appraisal_form = EmployeeAppraisalForm.objects.create(
                     employee=employee,
-                    product_knowledge=data.get('product_knowledge'),
-                    system_knowledge=data.get('system_knowledge'),
-                    sales_promotion_skills=data.get('sales_promotion_skills'),
-                    private_label_promotion_skills=data.get('private_label_promotion_skills'),
-                    customer_interaction_skills=data.get('customer_interaction_skills'),
+                    product_knowledge=data.get('productKnowledge'),
+                    system_knowledge=data.get('systemKnowledge'),
+                    sales_promotion_skills=data.get('salesPromotionSkills'),
+                    private_label_promotion_skills=data.get('privateLabel_promotionSkills'),
+                    customer_interaction_skills=data.get('customerInteractionSkills'),
                     comments=data.get('comments'),
                     status='Supervisor Reviewed',
-                    supervisor_rating=data.get('supervisor_rating'),
-                    overall_rating=data.get('overall_rating'),
+                    supervisor_rating=data.get('supervisorRating'),
+                    overall_rating=data.get('overallRating'),
                     reviewed_by=user
                 )
                 """ Copilot suggestion

@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { APPRAISAL_BASE_URL } from "../config/config.environment";
 
-const AppraisalForm = () => {
+const AppraisalForm = ({ location }) => {
+  const [formData, setFormData] = useState(location.state);
   const { handleSubmit, control, formState: { errors } } = useForm();
 
   const handleFormSubmit = (data) => {
-    // Handle form submission
-    console.log(data);
-  };
+    data['user_id'] = localStorage.getItem('userId');
+    // data['employee_id'] = location.state.employee_id;
+    data['employee_id'] = formData.employee_id;
+    fetch(APPRAISAL_BASE_URL + 'api/appraisalentry/get_employee_appraisal_form', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the API response as needed
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle any error that occurred during the API call
+        console.error(error);
+      });
+  }
+
+  console.log(formData, formData.product_knowledge)
 
   return (
     <form className="appraisal-form" onSubmit={handleSubmit(handleFormSubmit)}>
@@ -17,7 +38,7 @@ const AppraisalForm = () => {
         <Controller
           name="productKnowledge"
           control={control}
-          defaultValue=""
+          defaultValue={formData.product_knowledge}
           rules={{ required: 'Product Knowledge is required' }}
           render={({ field }) => (
             <select
@@ -42,7 +63,7 @@ const AppraisalForm = () => {
         <Controller
           name="systemKnowledge"
           control={control}
-          defaultValue=""
+          defaultValue={formData.system_knowledge}
           rules={{ required: 'System Knowledge is required' }}
           render={({ field }) => (
             <select
@@ -67,7 +88,7 @@ const AppraisalForm = () => {
         <Controller
           name="salesPromotionSkills"
           control={control}
-          defaultValue=""
+          defaultValue={formData.sales_promotion_skills}
           rules={{ required: 'Sales Promotion Skills is required' }}
           render={({ field }) => (
             <select
@@ -92,7 +113,7 @@ const AppraisalForm = () => {
         <Controller
           name="privateLabelPromotionSkills"
           control={control}
-          defaultValue=""
+          defaultValue={formData.private_label_promotion_skills}
           rules={{ required: 'Private Label Promotion Skills is required' }}
 
           render={({ field }) => (
@@ -117,7 +138,7 @@ const AppraisalForm = () => {
         <Controller
           name="customerInteractionSkills"
           control={control}
-          defaultValue=""
+          defaultValue={formData.customer_interaction_skills}
           rules={{ required: 'Customer Interaction Skills is required' }}
           render={({ field }) => (
             <select
@@ -142,7 +163,7 @@ const AppraisalForm = () => {
         <Controller
           name="overallRating"
           control={control}
-          defaultValue=""
+          defaultValue={formData.overall_rating}
           rules={{ required: 'Overall Rating is required' }}
           render={({ field }) => (
             <select
