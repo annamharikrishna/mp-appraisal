@@ -12,9 +12,10 @@ from .appraisal_manager import EmployeeAppraisalManager
 class EmployeeAppraisalView(APIView):
 
     def post(self, request):
-        data = request.data
+        data = request.query_params
+        if not bool(data):
+            data = request.data
         try:
-            pass
             response = EmployeeAppraisalManager().employee_appraisal(data)
         except Exception as error:
             return Response(str(error), 500)
@@ -70,7 +71,7 @@ class EmployeeLoginView(APIView):
 class EmployeeAppraisalDownloadView(APIView):
 
     def get(self, request):
-        data = request.data
+        data = request.query_params
         try:
             response = EmployeeAppraisalManager().get_employee_appraisal(data)
             response = EmployeeAppraisalManager().get_excel_response(response)

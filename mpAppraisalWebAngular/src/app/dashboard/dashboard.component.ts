@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
   status: any;
   from_date: any;
   to_date: any;
-  displayedColumns: string[] = ["employee_id", "product_knowledge", "system_knowledge", "sales_promotion_skills", "private_label_promotion_skills", "customer_interaction_skills", "overall_rating", "comments", "status"];
+  displayedColumns: string[] = ["employee_id", "product_knowledge", "system_knowledge", "sales_promotion_skills", 
+  "private_label_promotion_skills", "customer_interaction_skills", "overall_rating", "comments", "status"];
   // "product_knowledge":1,
   // "system_knowledge":1,
   // "sales_promotion_skills":1,
@@ -87,6 +88,32 @@ export class DashboardComponent implements OnInit {
 getEmployeeAppraisal(){
   this.sharedService.getEmployeeAppraisal(this.setFilterData()).subscribe((data:any)=>{
     this.appraisalData = data;
+    (error: any )=> console.log(error);
+  });
+}
+
+  // Write a function to update the status of the appraisal
+  // Use the shared service to update the status of the appraisal
+
+updateAppraisalStatus(row: any){
+  let data = {
+    appraisal_id: row.appraisal_id,
+    // status: status
+  }
+  // this.sharedService.updateAppraisalStatus(data).subscribe((data:any)=>{
+  //   this.getEmployeeAppraisal();
+  //   (error: any )=> console.log(error);
+  // });
+}
+
+// Write a function to download the appraisal data as a excel file using the shared service
+downloadAppraisal(){
+  this.sharedService.getDownloadableAppraisal(this.setFilterData()).subscribe((data:any)=>{
+    // this.sharedService.downloadFile(data, 'appraisal');
+    // Use the saveAs function to download the file from shared service
+    // The saveAs function takes the data and filename as parameters
+    // The filename should be appraisal
+    this.sharedService.saveFile(data, 'appraisal.xlsx');
     (error: any )=> console.log(error);
   });
 }

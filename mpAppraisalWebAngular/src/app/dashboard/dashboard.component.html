@@ -27,6 +27,8 @@
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
+    <!-- Add a download button to download the dahboard data -->
+    <button mat-raised-button color="primary" (click)="downloadAppraisal()">Download</button>
 </div>
 <div class="example-container">
     <mat-table #table [dataSource]="appraisalData">
@@ -66,6 +68,14 @@
             <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
         </ng-container>
+        <!-- add a column for actions -->
+        <!-- <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-button class="edit-button" (click)="updateAppraisalStatus(element)">Edit</button> -->
+                <!-- <button mat-button color="warn" (click)="deleteAppraisal(element)">Delete</button> -->
+            <!-- </mat-cell>
+        </ng-container> -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>

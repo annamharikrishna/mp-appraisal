@@ -3,6 +3,14 @@
     <form [formGroup]="appraisalForm" style="margin-left:10%">
     <mat-card-title>Employee Appraisal Form</mat-card-title>
     <mat-form-field appearance="outline">
+        <mat-label>Employee Id</mat-label>
+        <input matInput  formControlName="employee_id" required>
+        <span matSuffix style="padding-right:40px !important"></span>
+        <mat-error *ngIf="employee_id.hasError('required')">
+            This Field is Required 
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
             <mat-label>Product Knowledge</mat-label>
             <input matInput  formControlName="product_knowledge" required>
             <span matSuffix style="padding-right:40px !important"></span>

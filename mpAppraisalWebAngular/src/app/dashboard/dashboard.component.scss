@@ -3,3 +3,13 @@
   background-color: #673ab7;
   color: white;
 } 
+
+// write a custom css for a button
+// Path: src/app/dashboard/dashboard.component.scss
+// Compare this snippet from src/app/nav/nav.component.scss:
+
+.edit-button {
+  background-color: #673ab7;
+  color: white;
+  margin-right: 10px;
+}
