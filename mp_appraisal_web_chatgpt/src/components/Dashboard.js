@@ -60,6 +60,7 @@ const Dashboard = () => {
       pathname: "/appraisal",
       state: data,
     });
+    console.log(data)
     closePopup();
   };
 
@@ -71,36 +72,36 @@ const Dashboard = () => {
     <div className="container mt-4">
       <h2>Dashboard</h2>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
-      {appraisals.map((appraisal) => (
-        <div className="col" key={appraisal.id}>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">User ID: {appraisal.employee_id}</h5>
-            <p className="card-text">Rating: {appraisal.rating}</p>
-            <button className="btn btn-primary me-2" onClick={() => editAppraisal()}>Edit</button>
-            <button className="btn btn-secondary" onClick={() => openPopup(appraisal)}>View</button>
+        {appraisals.map((appraisal) => (
+          <div className="col" key={appraisal.id}>
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">User ID: {appraisal.employee_id}</h5>
+                <p className="card-text">Rating: {appraisal.rating}</p>
+                <button className="btn btn-primary me-2" onClick={() => editAppraisal(appraisal)}>Edit</button>
+                <button className="btn btn-secondary" onClick={() => openPopup(appraisal)}>View</button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-        // <div className="card" key={appraisal.id}>
-        //   <p>User ID: {appraisal.employee_id}</p>
-        //   <p>Overall Rating: {appraisal.overall_rating}</p>
-        //   <div className="btn-container">
-        //     <button onClick={() => openPopup(appraisal)}>View</button>
-        //     <button onClick={() => editAppraisal()}>Edit</button>
-        //   </div>
-        // </div>
-      ))}
-      {selectedAppraisal && (
-        <Popup onClose={closePopup}>
-          <h3>Appraisal Details</h3>
-          <p>User ID: {selectedAppraisal.userId}</p>
-          <p>Overall Rating: {selectedAppraisal.overallRating}</p>
-        </Popup>
-      )}
-      {editingMode && (
-        <EditForm appraisal={selectedAppraisal} onClose={closeEditForm} />
-      )}
+          // <div className="card" key={appraisal.id}>
+          //   <p>User ID: {appraisal.employee_id}</p>
+          //   <p>Overall Rating: {appraisal.overall_rating}</p>
+          //   <div className="btn-container">
+          //     <button onClick={() => openPopup(appraisal)}>View</button>
+          //     <button onClick={() => editAppraisal()}>Edit</button>
+          //   </div>
+          // </div>
+        ))}
+        {selectedAppraisal && (
+          <Popup onClose={closePopup}>
+            <h3>Appraisal Details</h3>
+            <p>User ID: {selectedAppraisal.userId}</p>
+            <p>Overall Rating: {selectedAppraisal.overallRating}</p>
+          </Popup>
+        )}
+        {editingMode && (
+          <EditForm appraisal={selectedAppraisal} onClose={closeEditForm} />
+        )}
       </div>
     </div>
   );
