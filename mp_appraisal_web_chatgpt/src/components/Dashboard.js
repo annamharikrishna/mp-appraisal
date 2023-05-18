@@ -20,7 +20,7 @@ const Dashboard = () => {
 
     const apiUrl = APPRAISAL_BASE_URL + "api/appraisalentry/get_employee_appraisal_form";
     const params = {
-      user_id: localStorage.getItem("user_id"),
+      user_id: localStorage.getItem("userId"),
     };
 
     // Convert the params object into a query string
@@ -36,6 +36,7 @@ const Dashboard = () => {
       .then((response) => response.json())
       .then((data) => {
         // Handle the response data
+        console.log({data})
         setAppraisals(data);
       })
       .catch((error) => {
@@ -46,6 +47,7 @@ const Dashboard = () => {
 
   const openPopup = (appraisal) => {
     setSelectedAppraisal(appraisal);
+    // setEditingMode(true);
   };
 
   const closePopup = () => {
@@ -83,14 +85,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          // <div className="card" key={appraisal.id}>
-          //   <p>User ID: {appraisal.employee_id}</p>
-          //   <p>Overall Rating: {appraisal.overall_rating}</p>
-          //   <div className="btn-container">
-          //     <button onClick={() => openPopup(appraisal)}>View</button>
-          //     <button onClick={() => editAppraisal()}>Edit</button>
-          //   </div>
-          // </div>
+          
         ))}
         {selectedAppraisal && (
           <Popup onClose={closePopup}>
