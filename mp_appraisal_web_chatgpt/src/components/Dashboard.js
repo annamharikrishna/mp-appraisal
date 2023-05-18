@@ -20,7 +20,7 @@ const Dashboard = () => {
 
     const apiUrl = APPRAISAL_BASE_URL + "api/appraisalentry/get_employee_appraisal_form";
     const params = {
-      user_id: localStorage.getItem("user_id"),
+      user_id: localStorage.getItem("userId"),
     };
 
     // Convert the params object into a query string
@@ -36,6 +36,7 @@ const Dashboard = () => {
       .then((response) => response.json())
       .then((data) => {
         // Handle the response data
+        console.log({data})
         setAppraisals(data);
       })
       .catch((error) => {
@@ -46,6 +47,7 @@ const Dashboard = () => {
 
   const openPopup = (appraisal) => {
     setSelectedAppraisal(appraisal);
+    // setEditingMode(true);
   };
 
   const closePopup = () => {
@@ -60,6 +62,7 @@ const Dashboard = () => {
       pathname: "/appraisal",
       state: data,
     });
+    console.log(data)
     closePopup();
   };
 
@@ -68,28 +71,33 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="container mt-4">
       <h2>Dashboard</h2>
-      {appraisals.map((appraisal) => (
-        <div className="card" key={appraisal.id}>
-          <p>User ID: {appraisal.employee_id}</p>
-          <p>Overall Rating: {appraisal.overall_rating}</p>
-          <div className="btn-container">
-            <button onClick={() => openPopup(appraisal)}>View</button>
-            <button onClick={() => editAppraisal(appraisal)}>Edit</button>
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        {appraisals.map((appraisal) => (
+          <div className="col" key={appraisal.id}>
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">User ID: {appraisal.employee_id}</h5>
+                <p className="card-text">Rating: {appraisal.rating}</p>
+                <button className="btn btn-primary me-2" onClick={() => editAppraisal(appraisal)}>Edit</button>
+                <button className="btn btn-secondary" onClick={() => openPopup(appraisal)}>View</button>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
-      {selectedAppraisal && (
-        <Popup onClose={closePopup}>
-          <h3>Appraisal Details</h3>
-          <p>User ID: {selectedAppraisal.userId}</p>
-          <p>Overall Rating: {selectedAppraisal.overallRating}</p>
-        </Popup>
-      )}
-      {editingMode && (
-        <EditForm appraisal={selectedAppraisal} onClose={closeEditForm} />
-      )}
+          
+        ))}
+        {selectedAppraisal && (
+          <Popup onClose={closePopup}>
+            <h3>Appraisal Details</h3>
+            <p>User ID: {selectedAppraisal.userId}</p>
+            <p>Overall Rating: {selectedAppraisal.overallRating}</p>
+          </Popup>
+        )}
+        {editingMode && (
+          <EditForm appraisal={selectedAppraisal} onClose={closeEditForm} />
+        )}
+      </div>
     </div>
   );
 };
