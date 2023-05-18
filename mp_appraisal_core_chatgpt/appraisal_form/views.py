@@ -1,7 +1,7 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .models import Appraisal
-from .serializers import AppraisalFormSerializer
+from .models import Appraisal, Employee
+from .serializers import AppraisalFormSerializer, EmployeeSerializer
 
 
 class AppraisalFormCreateView(generics.CreateAPIView):
@@ -14,4 +14,9 @@ class AppraisalFormCreateView(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class EmployeeRegistrationView(generics.CreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
 
