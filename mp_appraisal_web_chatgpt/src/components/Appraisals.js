@@ -42,10 +42,9 @@ const AppraisalForm = ({ location }) => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          // Handle the API response as needed
           console.log(data);
-          setFormData(data[0]);
-          if (
+          setFormData(data.length > 0 ? data[0] : []);
+          if ( data[0] && 
             data[0].employee_id !==
             parseInt(localStorage.getItem("employee_id"))
           ) {
@@ -109,7 +108,7 @@ const AppraisalForm = ({ location }) => {
             <Controller
               name="productKnowledge"
               control={control}
-              defaultValue={formData?.product_knowledge || null}
+              defaultValue={formData?.product_knowledge }
               rules={{ required: "Product Knowledge is required" }}
               render={({ field }) => (
                 <select
