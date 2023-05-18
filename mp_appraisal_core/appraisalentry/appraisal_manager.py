@@ -24,10 +24,10 @@ class EmployeeAppraisalManager:
         employee_appraisal_form = None
         employee = Employee.objects.get(id=data.get('employee_id'))
         user = Employee.objects.get(employee_id=data.get('user_id'))
-        if data.get('employee_id') == str(user.id) or user.role == 'employee':
+        if data.get('employee_id') == user.id or user.role == 'employee':
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
             if employee_appraisal_form:
-                employee_appraisal_form = EmployeeAppraisalForm.objects.update(
+                employee_appraisal_form.update(
                     employee=employee,
                     product_knowledge=data.get('productKnowledge'),
                     system_knowledge=data.get('systemKnowledge'),
@@ -55,9 +55,9 @@ class EmployeeAppraisalManager:
                     overall_rating=data.get('overallRating')
                 )
         elif user.role == 'supervisor':
-            employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
-            if employee_appraisal_form.status == 'Submitted':
-                employee_appraisal_form = EmployeeAppraisalForm.objects.update(
+            employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
+            if employee_appraisal_form.first().status == 'Submitted':
+                employee_appraisal_form.update(
                     employee=employee,
                     product_knowledge=data.get('productKnowledge'),
                     system_knowledge=data.get('systemKnowledge'),
@@ -78,7 +78,7 @@ class EmployeeAppraisalManager:
         elif user.role == 'manager':
             employee_appraisal_form = EmployeeAppraisalForm.objects.get(employee=employee)
             if employee_appraisal_form.status == 'Supervisor Reviewed':
-                employee_appraisal_form = EmployeeAppraisalForm.objects.update(
+                employee_appraisal_form.update(
                     employee=employee,
                     product_knowledge=data.get('productKnowledge'),
                     system_knowledge=data.get('systemKnowledge'),
@@ -112,8 +112,9 @@ class EmployeeAppraisalManager:
         else:
             raise Exception("user_id is required")
         if data.get('employee_id'):
-            employee = Employee.objects.get(employee_id=data.get('employee_id'))
+            employee = Employee.objects.get(id=data.get('employee_id'))
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(employee=employee)
+            return employee_appraisal_form.values()
         elif data.get('status'):
             employee_appraisal_form = EmployeeAppraisalForm.objects.filter(status=data.get('status'))
         elif data.get('from_date') and data.get('to_date'):

@@ -47,6 +47,8 @@ const LoginPage = () => {
       } else {
         history.push("/dashboard");
       }
+
+    window.location.reload();
     }
   };
 
