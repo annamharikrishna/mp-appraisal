@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { APPRAISAL_BASE_URL } from "../config/config.environment";
 
 const AppraisalForm = ({ location }) => {
   const [formData, setFormData] = useState(location.state);
+  const [handleRatingPermission, setHandleRatingPermission] = useState(false);
   const [role, setRole] = useState(localStorage.getItem("role"));
   const {
     handleSubmit,
@@ -11,15 +12,62 @@ const AppraisalForm = ({ location }) => {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    if (
+      formData &&
+      formData.employee_id !== parseInt(localStorage.getItem("employee_id"))
+    ) {
+      setHandleRatingPermission(true);
+    } else {
+      setHandleRatingPermission(false);
+    }
+    if (location.state === undefined) {
+      const apiUrl =
+        APPRAISAL_BASE_URL + "api/appraisalentry/get_employee_appraisal_form";
+      const params = {
+        user_id: localStorage.getItem("user_id"),
+        employee_id: localStorage.getItem("employee_id"),
+      };
+
+      // Convert the params object into a query string
+      const queryString = Object.keys(params)
+        .map(
+          (key) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+        )
+        .join("&");
+
+      // Append the query string to the URL
+      const url = `${apiUrl}?${queryString}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setFormData(data.length > 0 ? data[0] : []);
+          if ( data[0] && 
+            data[0].employee_id !==
+            parseInt(localStorage.getItem("employee_id"))
+          ) {
+            setHandleRatingPermission(true);
+          } else {
+            setHandleRatingPermission(false);
+          }
+        })
+        .catch((error) => {
+          // Handle any error that occurred during the API call
+          console.error(error);
+        });
+    }
+  }, []);
+
   const handleFormSubmit = (data) => {
-    data["user_id"] = localStorage.getItem("user_id");
-    if (formData === undefined) {
+    if (location.state === undefined) {
       data["employee_id"] = localStorage.getItem("employee_id");
-    }
-    else {
+      data["user_id"] = localStorage.getItem("user_id");
+    } else {
       data["employee_id"] = formData.employee_id;
+      data["user_id"] = localStorage.getItem("user_id");
     }
-    // data["employee_id"] = formData.employee_id;
     if (data?.supervisorRating === "") {
       data["supervisorRating"] = null;
     }
@@ -49,7 +97,7 @@ const AppraisalForm = ({ location }) => {
 
   return (
     <>
-      { (
+      {formData && (
         <form
           className="appraisal-form"
           onSubmit={handleSubmit(handleFormSubmit)}
@@ -60,7 +108,7 @@ const AppraisalForm = ({ location }) => {
             <Controller
               name="productKnowledge"
               control={control}
-              defaultValue={formData?.product_knowledge || null}
+              defaultValue={formData?.product_knowledge }
               rules={{ required: "Product Knowledge is required" }}
               render={({ field }) => (
                 <select
@@ -182,6 +230,7 @@ const AppraisalForm = ({ location }) => {
               </span>
             )}
           </div>
+
           <div className="form-group">
             <label htmlFor="customerInteractionSkills">
               Customer Interaction Skills:
@@ -237,14 +286,14 @@ const AppraisalForm = ({ location }) => {
             )}
           </div>
 
-          {(role === "employee" || role === "supervisor") && (
+          {role === "supervisor" && handleRatingPermission && (
             <div className="form-group">
               <label htmlFor="supervisorRating">Supervisor Rating:</label>
               <Controller
                 name="supervisorRating"
                 control={control}
                 defaultValue={formData?.supervisor_rating || null}
-                // rules={{ required: 'Supervisor Rating is required' }}
+                rules={{ required: "Supervisor Rating is required" }}
                 render={({ field }) => (
                   <select
                     id="supervisorRating"
@@ -271,14 +320,14 @@ const AppraisalForm = ({ location }) => {
             </div>
           )}
 
-          {(role === "employee" || role === "manager") && (
+          {role === "manager" && handleRatingPermission && (
             <div className="form-group">
               <label htmlFor="managerRating">Manager Rating:</label>
               <Controller
                 name="managerRating"
                 control={control}
                 defaultValue={formData?.manager_rating || null}
-                // rules={{ required: 'Manager Rating is required' }}
+                rules={{ required: "Manager Rating is required" }}
                 render={({ field }) => (
                   <select
                     id="managerRating"
